@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Techनिकी - Empowering Innovation in Technology',
   description: 'Join Techनिकी, the premier tech community for AI, ML, Web Development, AR, and VR enthusiasts.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
