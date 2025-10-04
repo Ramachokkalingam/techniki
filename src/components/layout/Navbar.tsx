@@ -25,8 +25,8 @@ export default function Navbar() {
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="relative w-8 h-8">
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="relative w-25 h-10">
               <Image
                 src="/logo.png"
                 alt="Techniki Logo"
@@ -34,9 +34,9 @@ export default function Navbar() {
                 className="object-contain transition-transform duration-300 group-hover:scale-110"
               />
             </div>
-            <span className="text-xl font-bold hidden sm:block">
+            {/* <span className="text-2xl font-bold hidden sm:block">
               Tech<span className="text-blue-400">निकी</span>
-            </span>
+            </span> */}
           </Link>
 
           {/* Desktop Navigation */}
