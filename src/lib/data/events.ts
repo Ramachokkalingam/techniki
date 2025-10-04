@@ -54,7 +54,7 @@ export const pastEvents: Event[] = [
     status: 'completed',
     description:
       'Use IoT to solve real-life problems! Build smart home automation, safety systems, and more.',
-    image: '/assets/images/events/brain_to_build.jpg',
+    image: '/assets/images/events/Brain_to_build.jpg',
       gradient: 'from-green-600 to-blue-700',
     icon: 'microchip',
     participants: '15+ Teams',
