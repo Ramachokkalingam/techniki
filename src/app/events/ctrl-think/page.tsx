@@ -21,7 +21,7 @@ export default function CtrlThinkPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <div className="glass-card px-6 py-3 rounded-full">
                 <i className="fas fa-calendar mr-2 text-blue-400"></i>
-                <span className="text-white font-semibold">February 24, 2024</span>
+                <span className="text-white font-semibold">September 26, 2024</span>
               </div>
               <div className="glass-card px-6 py-3 rounded-full">
                 <i className="fas fa-users mr-2 text-purple-400"></i>

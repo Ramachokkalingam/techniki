@@ -36,7 +36,7 @@ export const pastEvents: Event[] = [
     id: 'ctrl-think',
     title: 'CTRL+THINK - Ideathon & Pitch Competition',
     category: 'Competition',
-    date: 'Feb 24, 2024',
+    date: 'Sep 26, 2024',
     status: 'completed',
     description:
       'A groundbreaking ideathon and pitch competition bringing together innovative minds to tackle real-world challenges. 25 teams, 100+ participants showcased their entrepreneurial spirit.',
