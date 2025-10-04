@@ -35,11 +35,11 @@ export const pastEvents: Event[] = [
   {
     id: 'ctrl-think',
     title: 'CTRL+THINK - Ideathon & Pitch Competition',
-    category: 'Competition',
+    category: 'Hackathon',
     date: 'Sep 26, 2024',
     status: 'completed',
     description:
-      'A groundbreaking ideathon and pitch competition bringing together innovative minds to tackle real-world challenges. 25 teams, 100+ participants showcased their entrepreneurial spirit.',
+    'A 15+ hours hackathon that brought together 25 teams and over 100+ innovative minds in the vibrant vibe of a cafe, where participants built solutions addressing real-life problems through creativity, technology, and teamwork.',
     image: '/assets/images/events/ctrl-think-1.jpg',
     gradient: 'from-purple-600 to-blue-700',
     icon: 'lightbulb',
@@ -49,12 +49,13 @@ export const pastEvents: Event[] = [
   {
     id: 'iot-solutions',
     title: 'Brain to Build: IoT Solutions',
-    category: 'Workshop',
+    category: 'Competition',
     date: 'Sep 23, 2025',
     status: 'completed',
     description:
       'Use IoT to solve real-life problems! Build smart home automation, safety systems, and more.',
-    gradient: 'from-green-600 to-blue-700',
+    image: '/assets/images/events/brain_to_build.jpg',
+      gradient: 'from-green-600 to-blue-700',
     icon: 'microchip',
     participants: '15+ Teams',
     detailsPage: '/events/iot-solutions',
@@ -62,12 +63,13 @@ export const pastEvents: Event[] = [
   {
     id: 'pitch-craft',
     title: 'Pitch Craft - Ideas to Reality',
-    category: 'Workshop',
+    category: 'Competition',
     date: 'Sep 22, 2025',
     status: 'completed',
     description:
       'Learn to create powerful pitches, get expert feedback, and turn your concepts into actionable ventures.',
-    gradient: 'from-orange-600 to-red-700',
+    image: '/assets/images/events/Pitch_Craft.jpg',
+      gradient: 'from-orange-600 to-red-700',
     icon: 'microphone',
     participants: '10+ Teams',
     detailsPage: '/events/pitch-craft',
@@ -80,6 +82,7 @@ export const pastEvents: Event[] = [
     status: 'completed',
     description:
       'A hands-on workshop covering Git version control and GitHub essentials for collaborative projects.',
+     image: '/assets/images/events/github.jpg',
     gradient: 'from-gray-600 to-gray-800',
     icon: 'code-branch',
     participants: '50+ Participants',
@@ -92,7 +95,8 @@ export const pastEvents: Event[] = [
     status: 'completed',
     description:
       'Intensive hands-on workshop on Machine Learning fundamentals with practical projects',
-    gradient: 'from-green-600 to-blue-700',
+    image: '/assets/images/events/ai_ml.png',
+      gradient: 'from-green-600 to-blue-700',
     icon: 'lightbulb',
     participants: '85 Participants',
   },
@@ -104,6 +108,7 @@ export const pastEvents: Event[] = [
     status: 'completed',
     description:
       '48-hour innovation marathon where teams solved real-world problems with creative solutions',
+      image:"/assets/images/events/innovathon.png",
     gradient: 'from-purple-600 to-pink-700',
     icon: 'trophy',
     participants: '500+ Participants',

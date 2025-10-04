@@ -46,7 +46,7 @@ export default function CtrlThinkPage() {
             <div className="glass-card p-8 rounded-2xl mb-12">
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 CTRL+THINK was a groundbreaking ideathon and pitch competition organized by Techनिकी on 
-                <strong className="text-blue-400"> February 24, 2024</strong>, at Amity University Haryana. 
+                <strong className="text-blue-400"> September 26, 2024</strong>, at Amity University Haryana. 
                 This event brought together innovative minds to tackle real-world challenges through creative thinking 
                 and strategic planning.
               </p>
