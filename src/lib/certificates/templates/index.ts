@@ -16,7 +16,7 @@
 
 export const TEMPLATE_PATHS = {
   // CTRL+THINK Event Template
-  'ctrl-think-2024': '/assets/images/templates/ctrl_think.jpg',
+  'ctrl-think-2025': '/assets/images/templates/ctrl_think.jpg',
   
   // Future event templates - add here:
   // 'innovathon-2024': '/assets/images/templates/innovathon.jpg',
@@ -37,7 +37,7 @@ export function getTemplatePath(eventId: string): string {
  * Defines where elements (name, QR code, etc.) should be placed on each template
  */
 export const TEMPLATE_POSITIONS = {
-  'ctrl-think-2024': {
+  'ctrl-think-2025': {
     name: {
       x: 600,      // X coordinate (horizontal position)
       y: 450,      // Y coordinate (vertical position)
@@ -71,5 +71,5 @@ export const TEMPLATE_POSITIONS = {
  * @returns Positioning configuration or default
  */
 export function getTemplatePositions(eventId: string) {
-  return TEMPLATE_POSITIONS[eventId as keyof typeof TEMPLATE_POSITIONS] || TEMPLATE_POSITIONS['ctrl-think-2024'];
+  return TEMPLATE_POSITIONS[eventId as keyof typeof TEMPLATE_POSITIONS] || TEMPLATE_POSITIONS['ctrl-think-2025'];
 }

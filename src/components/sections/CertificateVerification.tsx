@@ -180,7 +180,7 @@ export default function CertificateVerification() {
                     searchType === 'certificateId'
                       ? 'e.g., TECH-CT-2024-001'
                       : searchType === 'enrollment'
-                      ? 'e.g., A50105225074'
+                      ? 'e.g., A501052XXXXX'
                       : 'e.g., student@example.com'
                   }
                   className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"

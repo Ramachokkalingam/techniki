@@ -4,12 +4,12 @@ import { TEMPLATE_PATHS } from '../templates';
 
 // Event Configuration
 export const ctrlThinkConfig: EventConfig = {
-  eventId: 'ctrl-think-2024',
+  eventId: 'ctrl-think-2025',
   eventName: 'CTRL+THINK (ALLNIGHT VIBECODING @DEJABREW)',
-  eventDate: '26th & 27th September 2024',
-  issueDate: '28th September 2024',
-  certificatePrefix: 'TECH-CT-2024',
-  templatePath: TEMPLATE_PATHS['ctrl-think-2024'],
+  eventDate: '26th & 27th September 2025',
+  issueDate: '28th September 2025',
+  certificatePrefix: 'TECH-CT-2025',
+  templatePath: TEMPLATE_PATHS['ctrl-think-2025'],
   templateConfig: {
     type: 'overlay',
     dimensions: {

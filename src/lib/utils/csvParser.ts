@@ -23,5 +23,5 @@ export function parseCSV(csvContent: string): CSVRow[] {
 }
 
 export function generateCertificateId(id: string): string {
-  return `TECH-CT-2024-${id.padStart(3, '0')}`;
+  return `TECH-CT-2025-${id.padStart(3, '0')}`;
 }
