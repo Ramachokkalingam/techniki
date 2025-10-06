@@ -11,7 +11,7 @@ export interface CertificateTemplate {
 
 export async function generateQRCode(certificateId: string): Promise<string> {
   try {
-    const verificationUrl = `${window.location.origin}/certificates/verify/${certificateId}`;
+   const verificationUrl = `${window.location.origin}/certificates/verify/${certificateId}`;
     const qrCodeDataUrl = await QRCode.toDataURL(verificationUrl, {
       width: 300,
       margin: 1,
@@ -88,7 +88,8 @@ export async function generateCertificateWithOverlay(data: CertificateTemplate):
           }
           .participant-name {
             position: absolute;
-            top: 51%;
+            /* moved up by 40px (was calc(51% - 12px)) */
+            top: calc(51% - 32px);
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 48px;
@@ -102,7 +103,7 @@ export async function generateCertificateWithOverlay(data: CertificateTemplate):
           }
           .qr-code {
             position: absolute;
-            bottom: 8%;
+            bottom: calc(8% + 300px);
             right: 5%;
             width: 120px;
             height: 120px;
