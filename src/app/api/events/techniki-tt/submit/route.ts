@@ -9,7 +9,7 @@ type Payload = {
   leaderCourse?: string;
   joinedWhatsapp?: boolean;
   members?: string[];
-  [key: string]: any;
+  [key: string]: string | string[] | boolean | undefined;
 };
 
 const DATA_DIR = path.resolve(process.cwd(), 'data', 'events');
@@ -19,7 +19,7 @@ function ensureDir(dir: string) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 }
 
-function toCSVRow(obj: Record<string, any>, headers: string[]) {
+function toCSVRow(obj: Record<string, string | string[] | boolean | undefined>, headers: string[]) {
   return headers.map(h => {
     const v = obj[h];
     if (v === undefined || v === null) return '';
@@ -64,7 +64,7 @@ export async function POST(req: Request) {
     }
 
     // Build row
-    const rowObj: Record<string, any> = {};
+    const rowObj: Record<string, string | string[] | boolean | undefined> = {};
     headers.forEach(h => {
       if (h === 'timestamp') rowObj[h] = new Date().toISOString();
       else rowObj[h] = payload[h] ?? '';
@@ -74,8 +74,9 @@ export async function POST(req: Request) {
     fs.appendFileSync(CSV_PATH, row);
 
     return NextResponse.json({ success: true });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Error saving submission', err);
-    return NextResponse.json({ error: err?.message || 'Failed' }, { status: 500 });
+    const errorMessage = err instanceof Error ? err.message : 'Failed';
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

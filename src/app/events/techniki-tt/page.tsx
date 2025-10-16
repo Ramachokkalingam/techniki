@@ -3,7 +3,6 @@
 
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function TechnikiTTPage() {
@@ -19,8 +18,8 @@ export default function TechnikiTTPage() {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const payload: Record<string, any> = {};
-    formData.forEach((v, k) => (payload[k] = v));
+    const payload: Record<string, string | string[] | boolean> = {};
+    formData.forEach((v, k) => (payload[k] = v.toString()));
     payload.joinedWhatsapp = !!formData.get('joinedWhatsapp');
 
     // Collect members into an array
@@ -47,8 +46,9 @@ export default function TechnikiTTPage() {
       setSuccess('Team registered successfully! 🎉');
       form.reset();
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err: any) {
-      setError(err?.message || 'Unknown error occurred. Please try again.');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred. Please try again.';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -69,7 +69,7 @@ export default function TechnikiTTPage() {
                 🚀 Techniki Teams (TT)
               </h1>
               <p className="text-xl text-gray-300 mb-2">
-                Register your innovative idea and showcase your team's talent
+                Register your innovative idea and showcase your team&apos;s talent
               </p>
             </div>
           </div>
