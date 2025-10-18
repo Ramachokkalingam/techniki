@@ -19,6 +19,25 @@ export const stats = [
   },
 ];
 
+export const animationStyles = `
+  @keyframes scale-bounce {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+`;
+
 export const teamStats = [
   {
     id: 1,
@@ -76,25 +95,25 @@ export const eventStats = [
 export const projectStats = [
   {
     id: 1,
-    value: '50',
+    value: '50+',
     label: 'Total Projects',
     color: 'blue',
   },
   {
     id: 2,
-    value: '15',
+    value: '15+',
     label: 'AI/ML Projects',
     color: 'purple',
   },
   {
     id: 3,
-    value: '25',
+    value: '25+',
     label: 'Web Projects',
     color: 'green',
   },
   {
     id: 4,
-    value: '10',
+    value: '10+',
     label: 'Mobile Apps',
     color: 'yellow',
   },

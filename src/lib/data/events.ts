@@ -86,6 +86,7 @@ export const pastEvents: Event[] = [
     gradient: 'from-gray-600 to-gray-800',
     icon: 'code-branch',
     participants: '50+ Participants',
+    detailsPage: '/events/Git_Github',
   },
   {
     id: 'ai-ml-bootcamp',

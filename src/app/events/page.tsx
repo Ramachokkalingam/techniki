@@ -35,10 +35,10 @@ export default function EventsPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Upcoming Events
             </h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              Don&amp;apos;t miss out on our exciting upcoming events and workshops
-            </p>
-          </div>
+           <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+  Don't miss out on our exciting upcoming events and workshops
+</p>
+ </div>
 
           {upcomingEvents.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
