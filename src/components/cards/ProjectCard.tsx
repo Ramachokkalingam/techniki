@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Project } from '@/lib/data/projects';
 
 interface ProjectCardProps {
@@ -27,9 +28,11 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
       >
         <div className="relative">
           {project.image ? (
-            <img
+            <Image
               src={project.image}
               alt={project.title}
+              width={600}
+              height={400}
               className="h-64 w-full object-contain bg-gray-800 rounded-t-2xl"
             />
           ) : (

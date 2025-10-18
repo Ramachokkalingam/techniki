@@ -81,14 +81,14 @@ export async function POST(req: Request) {
       const oldData = rows.slice(1).filter(Boolean).join('\n');
       try {
         fs.writeFileSync(targetPath, headers.join(',') + '\n' + (oldData ? oldData + '\n' : ''));
-      } catch (err) {
+      } catch (_err) {
         // If rewrite fails on primary, try tmp fallback
         if (targetPath !== TMP_CSV_PATH) {
           ensureDir(TMP_DIR);
           fs.writeFileSync(TMP_CSV_PATH, headers.join(',') + '\n' + (oldData ? oldData + '\n' : ''));
           targetPath = TMP_CSV_PATH;
         } else {
-          throw err;
+          throw _err;
         }
       }
     }
@@ -103,7 +103,7 @@ export async function POST(req: Request) {
     const row = toCSVRow(rowObj, headers);
     try {
       fs.appendFileSync(targetPath, row);
-    } catch (err: any) {
+    } catch (err: unknown) {
       // If append fails on primary due to read-only, fallback to temp
       if (targetPath !== TMP_CSV_PATH) {
         ensureDir(TMP_DIR);

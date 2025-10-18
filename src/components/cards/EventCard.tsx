@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Event } from '@/lib/data/events';
 
 interface EventCardProps {
@@ -23,9 +24,11 @@ export default function EventCard({ event }: EventCardProps) {
       <div className="relative">
         {event.image ? (
           <div className="h-48 overflow-hidden">
-            <img
+            <Image
               src={event.image}
               alt={event.title}
+              width={400}
+              height={300}
               className="w-full h-full object-cover scale-105"
             />
           </div>

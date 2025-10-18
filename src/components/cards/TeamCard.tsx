@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { TeamMember } from '@/lib/data/team';
 
 interface TeamCardProps {
@@ -50,13 +51,13 @@ export default function TeamCard({ member }: TeamCardProps) {
               backdropFilter: 'blur(10px)',
             }}
           >
-            <img
+            <Image
               src={member.image}
               alt={member.name}
+              width={100}
+              height={100}
               className="profile-image mb-6"
               style={{
-                width: '100px',
-                height: '100px',
                 objectFit: 'cover',
                 borderRadius: '50%',
                 border: '3px solid rgba(59, 130, 246, 0.3)',

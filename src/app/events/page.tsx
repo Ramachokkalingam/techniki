@@ -36,7 +36,7 @@ export default function EventsPage() {
               Upcoming Events
             </h2>
            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-  Don't miss out on our exciting upcoming events and workshops
+  Don&apos;t miss out on our exciting upcoming events and workshops
 </p>
  </div>
 
