@@ -84,7 +84,7 @@ export default function JoinPage() {
               {/* Embedded Google Form */}
               <div className="w-full" style={{ minHeight: '800px' }}>
                 <iframe
-                  src="https://docs.google.com/forms/d/e/1FAIpQLSf6YourFormID/viewform?embedded=true"
+                  src="https://docs.google.com/forms/d/e/1FAIpQLScNeIgXaGC-9SbBWVYBzTtEdD1ge9UwEM1uiAyYXfE6mCuLGA/viewform?embedded=true"
                   width="100%"
                   height="800"
                   frameBorder="0"
