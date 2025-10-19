@@ -30,7 +30,7 @@ export const projects: Project[] = [
     category: 'robotics',
     description:
       'A comprehensive rover project featuring both a live website and detailed documentation. Explore the project showcase and dive deep into technical specifications, research papers, and implementation details.',
-    image: '/assets/images/logo/Astrix.png',
+    image: '/assets/images/events/Astrix.png',
     gradient: 'from-cyan-600 to-blue-700',
     icon: 'robot',
     technologies: ['Website', 'Research', 'Technical Specs'],

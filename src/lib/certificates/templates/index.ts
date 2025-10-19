@@ -17,6 +17,7 @@
 export const TEMPLATE_PATHS = {
   // CTRL+THINK Event Template
   'ctrl-think-2025': '/assets/images/templates/ctrl_think.jpg',
+  'Astrix': '/assets/images/templates/astrix.jpg'
   
   // Future event templates - add here:
   // 'innovathon-2024': '/assets/images/templates/innovathon.jpg',
