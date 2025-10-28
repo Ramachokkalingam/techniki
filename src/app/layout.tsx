@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import HyperspeedBackground from '@/components/layout/HyperspeedBackground';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -34,6 +35,9 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} bg-gray-900 text-white antialiased`}>
+        {/* Global Hyperspeed Background */}
+        <HyperspeedBackground />
+
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />

@@ -37,7 +37,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
             />
           ) : (
             <div
-              className={`h-64 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}
+              className={`h-64 bg-gradient-to-br ${project.gradient || 'from-blue-500 to-purple-600'} flex items-center justify-center`}
             >
               <i className={`fas fa-${project.icon} text-6xl text-white`}></i>
             </div>
@@ -72,20 +72,20 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
           </div>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-4 text-gray-400">
-              {project.stats.stars && (
+              {project.stats?.stars && (
                 <div className="flex items-center">
                   <i className="fas fa-star text-yellow-400 mr-1"></i>
                   <span>{project.stats.stars}</span>
                 </div>
               )}
-              {project.stats.views && (
+              {project.stats?.views && (
                 <div className="flex items-center">
                   <i className="fas fa-eye mr-1"></i>
                   <span>{project.stats.views}</span>
                 </div>
               )}
             </div>
-            {project.links.live && (
+            {project.links?.live && (
               <a
                 href={project.links.live}
                 target="_blank"
@@ -116,14 +116,16 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
     >
       <div className="relative">
         {project.image ? (
-          <img
+          <Image
             src={project.image}
             alt={project.title}
+            width={400}
+            height={192}
             className="h-48 w-full object-cover"
           />
         ) : (
           <div
-            className={`h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}
+            className={`h-48 bg-gradient-to-br ${project.gradient || 'from-blue-500 to-purple-600'} flex items-center justify-center`}
           >
             <i className={`fas fa-${project.icon} text-4xl text-white`}></i>
           </div>
@@ -153,7 +155,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3 text-gray-400 text-sm">
-            {project.stats.stars && (
+            {project.stats?.stars && (
               <div className="flex items-center">
                 <i className="fas fa-star text-yellow-400 mr-1"></i>
                 <span>{project.stats.stars}</span>
@@ -161,7 +163,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
             )}
           </div>
           <div className="flex space-x-2">
-            {project.links.demo && (
+            {project.links?.demo && (
               <a
                 href={project.links.demo}
                 target="_blank"
@@ -171,7 +173,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
                 <i className="fas fa-external-link-alt mr-1"></i>Demo
               </a>
             )}
-            {project.links.code && (
+            {project.links?.code && (
               <a
                 href={project.links.code}
                 target="_blank"

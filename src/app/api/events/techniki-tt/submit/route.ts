@@ -26,7 +26,7 @@ function toCSVRow(obj: Record<string, string | string[] | boolean | undefined>, 
   return headers.map(h => {
     const v = obj[h];
     if (v === undefined || v === null) return '';
-    // Escape quotes
+    // Escape quotes and handle arrays
     const s = Array.isArray(v) ? v.join('; ') : String(v);
     return `"${s.replace(/"/g, '""')}"`;
   }).join(',') + '\n';
@@ -36,9 +36,6 @@ export async function POST(req: Request) {
   try {
     const payload: Payload = await req.json();
 
-    ensureDir(DATA_DIR);
-
-    // Ensure CSV exists with headers (primary and tmp fallback)
     const defaultHeaders = [
       'timestamp',
       'projectTitle',
@@ -50,75 +47,118 @@ export async function POST(req: Request) {
     ];
 
     // Helper to write initial csv with headers to a path
-    const writeInitialCsv = (p: string) => {
+    const writeInitialCsv = (p: string): boolean => {
       try {
         const dir = path.dirname(p);
         ensureDir(dir);
-        if (!fs.existsSync(p)) fs.writeFileSync(p, defaultHeaders.join(',') + '\n');
+        if (!fs.existsSync(p)) {
+          fs.writeFileSync(p, defaultHeaders.join(',') + '\n', 'utf8');
+        }
         return true;
       } catch (err) {
+        console.error(`Failed to initialize CSV at ${p}:`, err);
         return false;
       }
     };
 
-    // Try primary location first; if that fails due to read-only FS, we'll fallback to tmp
+    // Try primary location first; if that fails due to read-only FS, fallback to tmp
     let targetPath = CSV_PATH;
+    let savedToTmp = false;
+
     if (!writeInitialCsv(targetPath)) {
       // Fallback to tmp dir
       targetPath = TMP_CSV_PATH;
-      writeInitialCsv(targetPath);
+      savedToTmp = true;
+      if (!writeInitialCsv(targetPath)) {
+        throw new Error('Unable to initialize CSV file in primary or temp location');
+      }
     }
 
-    // Read existing headers from the selected target and merge with any extra keys in payload
-    const existing = fs.readFileSync(targetPath, 'utf8').split('\n')[0] || '';
-    const existingHeaders = existing.split(',').filter(Boolean);
-    const extraKeys = Object.keys(payload).filter(k => !existingHeaders.includes(k) && !defaultHeaders.includes(k));
-    const headers = Array.from(new Set([...existingHeaders, ...extraKeys]));
+    // Read existing CSV and parse headers
+    const fileContent = fs.readFileSync(targetPath, 'utf8');
+    const lines = fileContent.split('\n').filter(line => line.trim().length > 0);
+    
+    if (lines.length === 0) {
+      // File is empty, write default headers
+      fs.writeFileSync(targetPath, defaultHeaders.join(',') + '\n', 'utf8');
+    }
 
-    // If headers changed (new extra keys), rewrite CSV with merged headers and keep old rows
-    if (headers.join(',') !== existingHeaders.join(',')) {
-      const rows = fs.readFileSync(targetPath, 'utf8').split('\n');
-      const oldData = rows.slice(1).filter(Boolean).join('\n');
+    // Parse existing headers
+    const headerLine = lines[0] || '';
+    const existingHeaders = headerLine.split(',').map(h => h.trim()).filter(Boolean);
+    
+    // Find extra keys in payload that aren't in existing headers
+    const payloadKeys = Object.keys(payload);
+    const extraKeys = payloadKeys.filter(k => !existingHeaders.includes(k));
+    
+    // Merge headers: existing + new extra keys
+    const headers = [...existingHeaders, ...extraKeys];
+
+    // If headers changed, rewrite CSV with new headers
+    if (extraKeys.length > 0) {
       try {
-        fs.writeFileSync(targetPath, headers.join(',') + '\n' + (oldData ? oldData + '\n' : ''));
-      } catch (_err) {
+        const dataRows = lines.slice(1); // Skip header row
+        const newContent = headers.join(',') + '\n' + 
+                          (dataRows.length > 0 ? dataRows.join('\n') + '\n' : '');
+        fs.writeFileSync(targetPath, newContent, 'utf8');
+      } catch (err) {
         // If rewrite fails on primary, try tmp fallback
         if (targetPath !== TMP_CSV_PATH) {
           ensureDir(TMP_DIR);
-          fs.writeFileSync(TMP_CSV_PATH, headers.join(',') + '\n' + (oldData ? oldData + '\n' : ''));
+          const dataRows = lines.slice(1);
+          const newContent = headers.join(',') + '\n' + 
+                            (dataRows.length > 0 ? dataRows.join('\n') + '\n' : '');
+          fs.writeFileSync(TMP_CSV_PATH, newContent, 'utf8');
           targetPath = TMP_CSV_PATH;
+          savedToTmp = true;
         } else {
-          throw _err;
+          throw err;
         }
       }
     }
 
-    // Build row
+    // Build row object with all headers
     const rowObj: Record<string, string | string[] | boolean | undefined> = {};
     headers.forEach(h => {
-      if (h === 'timestamp') rowObj[h] = new Date().toISOString();
-      else rowObj[h] = payload[h] ?? '';
+      if (h === 'timestamp') {
+        rowObj[h] = new Date().toISOString();
+      } else {
+        rowObj[h] = payload[h] ?? '';
+      }
     });
 
+    // Generate CSV row
     const row = toCSVRow(rowObj, headers);
+
+    // Append row to CSV
     try {
-      fs.appendFileSync(targetPath, row);
-    } catch (err: unknown) {
+      fs.appendFileSync(targetPath, row, 'utf8');
+    } catch (err) {
       // If append fails on primary due to read-only, fallback to temp
       if (targetPath !== TMP_CSV_PATH) {
         ensureDir(TMP_DIR);
-        fs.appendFileSync(TMP_CSV_PATH, row);
+        
+        // Copy existing data to temp location first
+        const existingData = fs.readFileSync(targetPath, 'utf8');
+        fs.writeFileSync(TMP_CSV_PATH, existingData, 'utf8');
+        
+        // Append new row
+        fs.appendFileSync(TMP_CSV_PATH, row, 'utf8');
         targetPath = TMP_CSV_PATH;
+        savedToTmp = true;
       } else {
         throw err;
       }
     }
 
-    const savedToTmp = targetPath === TMP_CSV_PATH;
-    return NextResponse.json({ success: true, savedToTmp, path: targetPath });
+    return NextResponse.json({ 
+      success: true, 
+      savedToTmp, 
+      path: targetPath 
+    });
   } catch (err: unknown) {
-    console.error('Error saving submission', err);
-    const errorMessage = err instanceof Error ? err.message : 'Failed';
+    console.error('Error saving submission:', err);
+    const errorMessage = err instanceof Error ? err.message : 'Failed to save submission';
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

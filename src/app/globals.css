@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 /* Custom Utility Classes */
 @layer components {
@@ -85,5 +85,18 @@ body {
 
 .backface-hidden {
   backface-visibility: hidden;
+}
+
+/* Hyperspeed global styles */
+#lights {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
 }
 
