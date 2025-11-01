@@ -256,6 +256,150 @@ export const projects: Project[] = [
     author: 'PRIYANSHI',
     status: 'live',
   },
+  {
+    id: 'smoke-detector-dashboard',
+    title: 'Smoke Detector Dashboard',
+    category: 'ai-ml',
+    description:
+      'IoT-based smoke detection system with real-time monitoring dashboard. Features intelligent alerts, data visualization, and automated safety responses for enhanced fire prevention and safety management.',
+    gradient: 'from-red-500 to-orange-600',
+    icon: 'fire-extinguisher',
+    technologies: ['IoT', 'Python', 'Dashboard', 'Sensors'],
+    stats: {
+      stars: '4.5',
+    },
+    links: {
+      code: 'https://github.com/YashasviRastogi/Smoke-Detector-Dashboard',
+    },
+    author: 'Yashasvi Rastogi',
+    status: 'completed',
+  },
+  {
+    id: 'c2-server',
+    title: 'C2 Server',
+    category: 'web',
+    description:
+      'Command and Control server implementation for cybersecurity research and educational purposes. Demonstrates network communication protocols, remote system management, and security testing frameworks.',
+    gradient: 'from-gray-700 to-red-700',
+    icon: 'server',
+    technologies: ['Python', 'Networking', 'Security', 'Backend'],
+    stats: {
+      stars: '4.3',
+    },
+    links: {
+      code: 'https://github.com/Thecybersameer/C2_SERVER',
+    },
+    author: 'Cyber Sameer',
+    status: 'completed',
+  },
+  {
+    id: 'project-tech',
+    title: 'Project Tech',
+    category: 'web',
+    description:
+      'Comprehensive technology project showcasing modern web development practices. Features responsive design, interactive components, and seamless user experience with cutting-edge frontend technologies.',
+    gradient: 'from-purple-500 to-blue-600',
+    icon: 'laptop-code',
+    technologies: ['React', 'JavaScript', 'CSS3', 'HTML5'],
+    stats: {
+      stars: '4.4',
+    },
+    links: {
+      code: 'https://github.com/techy-tresa/project-tech',
+    },
+    author: 'Techy Tresa',
+    status: 'completed',
+  },
+  {
+    id: 'ecommerce-store',
+    title: 'E-Commerce Store',
+    category: 'web',
+    description:
+      'Full-featured e-commerce platform with product catalog, shopping cart, secure payment integration, and order management. Built with modern web technologies for optimal performance and user experience.',
+    gradient: 'from-green-500 to-teal-600',
+    icon: 'shopping-cart',
+    technologies: ['React', 'Node.js', 'MongoDB', 'Payment Gateway'],
+    stats: {
+      stars: '4.7',
+    },
+    links: {
+      code: 'https://github.com/nikhilx133/e-commerce_store.git',
+    },
+    author: 'Nikhil',
+    status: 'completed',
+  },
+  {
+    id: 'smart-job-portal',
+    title: 'Smart Job Portal with AI Skill Matching',
+    category: 'ai-ml',
+    description:
+      'AI-powered job portal that intelligently matches candidates with opportunities based on skills, experience, and preferences. Features advanced algorithms for resume parsing and skill assessment.',
+    gradient: 'from-blue-600 to-indigo-700',
+    icon: 'briefcase',
+    technologies: ['AI/ML', 'Python', 'NLP', 'Web Development'],
+    stats: {
+      stars: '4.8',
+    },
+    links: {
+      code: 'https://github.com/PrachiStack/Smart-Job-Portal-with-AI-skill-Matching.git',
+    },
+    author: 'Prachi',
+    status: 'completed',
+  },
+  {
+    id: 'healthcare-prediction',
+    title: 'Healthcare Prediction System',
+    category: 'ai-ml',
+    description:
+      'Machine learning-based healthcare prediction system for disease diagnosis and risk assessment. Utilizes advanced algorithms to analyze patient data and provide accurate health predictions.',
+    gradient: 'from-pink-500 to-red-600',
+    icon: 'heartbeat',
+    technologies: ['Python', 'Machine Learning', 'Data Analysis', 'Healthcare'],
+    stats: {
+      stars: '4.6',
+    },
+    links: {
+      code: 'https://github.com/KcKabir/Healthcare_Prediction-',
+    },
+    author: 'Kabir',
+    status: 'completed',
+  },
+  {
+    id: 'enigma',
+    title: 'ENIGMA',
+    category: 'web',
+    description:
+      'Comprehensive project by Team Osiris featuring innovative solutions and modern web technologies. A complete end-to-end application demonstrating best practices in software development.',
+    gradient: 'from-purple-600 to-pink-700',
+    icon: 'puzzle-piece',
+    technologies: ['Full Stack', 'Web Development', 'Modern Framework'],
+    stats: {
+      stars: '4.9',
+    },
+    links: {
+      code: 'https://github.com/AnubhavDash/ENIGMA',
+    },
+    author: 'Team Osiris',
+    status: 'completed',
+  },
+  {
+    id: 'telegram-bot',
+    title: 'Telegram Bot',
+    category: 'ai-ml',
+    description:
+      'Intelligent Telegram bot with automated responses, command handling, and integration capabilities. Features natural language processing and customizable workflows for enhanced user interaction.',
+    gradient: 'from-cyan-500 to-blue-600',
+    icon: 'robot',
+    technologies: ['Python', 'Telegram API', 'Bot Framework', 'NLP'],
+    stats: {
+      stars: '4.5',
+    },
+    links: {
+      code: 'https://github.com/SahibTaj/Telegram_Bot',
+    },
+    author: 'Sahib Taj',
+    status: 'completed',
+  },
 ];
 
 export const projectCategories = [

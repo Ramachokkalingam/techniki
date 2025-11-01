@@ -52,8 +52,31 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* All Projects */}
+      {/* Recently Added Projects */}
       <section className="py-20 bg-black/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Recently Added Projects
+            </h2>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+              Fresh innovations from our community members
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {projects
+              .slice(-8)
+              .reverse()
+              .map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+          </div>
+        </div>
+      </section>
+
+      {/* All Projects */}
+      <section className="py-20 bg-gray-900/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
