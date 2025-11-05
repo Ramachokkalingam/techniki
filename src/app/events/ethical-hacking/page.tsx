@@ -46,13 +46,15 @@ export default function EthicalHackingRegistration() {
               <div className="flex justify-center">
                 <iframe
                   src="https://docs.google.com/forms/d/e/1FAIpQLSf4WpwUOdPzaFQwdmlAQXVrsV4bh3PUyVLSmuJfMwF-IpgFJQ/viewform?embedded=true"
-                  width="700"
-                  height="920"
+                  width="100%"
+                  height="1800"
                   frameBorder="0"
                   marginHeight={0}
                   marginWidth={0}
                   className="rounded-lg shadow-2xl"
-                  style={{ maxWidth: '100%', height: 'auto', aspectRatio: '700/920' }}
+                  style={{ border: 'none', background: 'white', borderRadius: '8px', minHeight: '1800px' }}
+                  loading="lazy"
+                  title="Ethical Hacking Workshop Registration Form"
                 >
                   Loading…
                 </iframe>
