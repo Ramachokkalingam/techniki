@@ -15,7 +15,7 @@ export default function EventsPage() {
         description="Join us for exciting tech events, hands-on workshops, and networking opportunities with industry experts and fellow tech enthusiasts."
         primaryButton={{
           text: 'Register Now',
-          href: '/join',
+          href: '#upcoming-events',
           icon: 'ticket-alt',
         }}
         secondaryButton={{
@@ -29,7 +29,7 @@ export default function EventsPage() {
       <Stats stats={eventStats} />
 
       {/* Upcoming Events */}
-      <section className="py-20 bg-gray-900/50">
+      <section id="upcoming-events" className="py-20 bg-gray-900/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">

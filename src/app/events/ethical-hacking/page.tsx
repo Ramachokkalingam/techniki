@@ -21,7 +21,7 @@ export default function EthicalHackingRegistration() {
               Register Now for Our Ethical Hacking Workshop
             </p>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              Join us for an intensive hands-on workshop where you&apos;ll learn the fundamentals of 
+              Join us for an intensive hangit ds-on workshop where you&apos;ll learn the fundamentals of 
               ethical hacking, penetration testing, and cybersecurity best practices.
             </p>
           </div>
