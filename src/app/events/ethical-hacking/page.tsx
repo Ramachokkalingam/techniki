@@ -27,7 +27,7 @@ export default function EthicalHackingRegistration() {
           </div>
 
           {/* Registration Form Container */}
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-9xl mx-auto">
             <div 
               className="glass-card p-8 rounded-2xl backdrop-blur-sm bg-white/10 border border-white/20"
               data-aos="fade-up"
@@ -47,12 +47,12 @@ export default function EthicalHackingRegistration() {
                 <iframe
                   src="https://docs.google.com/forms/d/e/1FAIpQLSf4WpwUOdPzaFQwdmlAQXVrsV4bh3PUyVLSmuJfMwF-IpgFJQ/viewform?embedded=true"
                   width="700"
-                  height="520"
+                  height="920"
                   frameBorder="0"
                   marginHeight={0}
                   marginWidth={0}
                   className="rounded-lg shadow-2xl"
-                  style={{ maxWidth: '100%', height: 'auto', aspectRatio: '700/520' }}
+                  style={{ maxWidth: '100%', height: 'auto', aspectRatio: '700/920' }}
                 >
                   Loading…
                 </iframe>
