@@ -400,6 +400,24 @@ export const projects: Project[] = [
     author: 'Sahib Taj',
     status: 'completed',
   },
+  {
+    id: 'file-merger39',
+    title: 'File Merger 39',
+    category: 'web',
+    description:
+      'A powerful file merging utility that combines multiple files into a single output. Features intelligent file handling, format preservation, and batch processing capabilities for efficient file management.',
+    gradient: 'from-orange-500 to-red-600',
+    icon: 'file-alt',
+    technologies: ['Python', 'File Processing', 'Automation', 'CLI'],
+    stats: {
+      stars: '4.6',
+    },
+    links: {
+      code: 'https://github.com/sazzan39/file-merger39',
+    },
+    author: 'Sazzan',
+    status: 'completed',
+  },
 ];
 
 export const projectCategories = [
