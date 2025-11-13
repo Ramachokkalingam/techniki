@@ -5,7 +5,7 @@ import { TEMPLATE_PATHS } from '../templates';
 // Event Configuration for Cyber Security Workshop
 export const cyberSecurityConfig: EventConfig = {
   eventId: 'cyber-security-2025',
-  eventName: 'Ethical hacking workshop',
+  eventName: 'CTF unlocked : Ethical hacking workshop',
   eventDate: '11th November 2025',
   issueDate: '11th November 2025',
   certificatePrefix: 'TECH-CS-2025',
