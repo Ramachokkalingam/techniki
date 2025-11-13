@@ -14,20 +14,7 @@ export interface Event {
 }
 
 export const upcomingEvents: Event[] = [
-  {
-    id: 'ethical-hacking-workshop',
-    title: 'Ethical Hacking Workshop',
-    category: 'Workshop',
-    date: 'Nov 11, 2025',
-    status: 'upcoming',
-    description:
-      'Learn ethical hacking fundamentals with live demos, explore different hacking tools, and understand defensive countermeasures. Organized by Techniki',
-    image: '/assets/images/events/ethical_hacking.jpg',
-    gradient: 'from-green-500 to-emerald-700',
-    link:'events/ethical-hacking',
-    icon: 'shield-alt',
-    participants: 'Registration Open',
-  },
+
   {
     id: 'techniki-tt',
     title: 'Techniki TT',
@@ -46,6 +33,20 @@ export const upcomingEvents: Event[] = [
 ];
 
 export const pastEvents: Event[] = [
+    {
+    id: 'ethical-hacking-workshop',
+    title: 'Ethical Hacking Workshop',
+    category: 'Workshop',
+    date: 'Nov 11, 2025',
+    status: 'completed',
+    description:
+      'Learn ethical hacking fundamentals with live demos, explore different hacking tools, and understand defensive countermeasures. Organized by Techniki',
+    image: '/assets/images/events/ethical_hacking.jpg',
+    gradient: 'from-green-500 to-emerald-700',   
+    icon: 'shield-alt',
+    participants: '80+ Participants',
+    detailsPage: '/',
+  },
   {
     id: 'ctrl-think',
     title: 'CTRL+THINK - Ideathon & Pitch Competition',

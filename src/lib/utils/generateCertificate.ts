@@ -42,7 +42,15 @@ export async function generateCertificateWithOverlay(data: CertificateTemplate):
       return;
     }
 
-    certificateWindow.document.write(`
+  // Decide name color based on template
+  const isCyber = templatePath.includes('cyber_security');
+  const nameColor = isCyber ? '#ffffff' : '#000';
+  const nameTextShadow = isCyber ? '0 2px 6px rgba(0,0,0,0.8)' : 'none';
+  // Slightly lower the name for the cyber security template for better visual alignment
+  // Move the name slightly lower on the cyber template to match the visual mock
+  const nameTop = isCyber ? 'calc(60% - 32px)' : 'calc(51% - 32px)';
+
+  certificateWindow.document.write(`
       <!DOCTYPE html>
       <html>
       <head>
@@ -89,12 +97,12 @@ export async function generateCertificateWithOverlay(data: CertificateTemplate):
           .participant-name {
             position: absolute;
             /* moved up by 40px (was calc(51% - 12px)) */
-            top: calc(51% - 32px);
+            top: calc(51% - 34px);
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 48px;
             font-weight: bold;
-            color: #000;
+            color: ${nameColor};
             text-align: center;
             width: 70%;
             font-family: 'Georgia', serif;
@@ -164,7 +172,7 @@ export async function generateCertificateWithOverlay(data: CertificateTemplate):
           <!-- Overlay Elements -->
           <div class="overlay">
             <!-- Participant Name -->
-            <div class="participant-name">${data.name}</div>
+            <div class="participant-name" style="color: ${nameColor} !important; text-shadow: ${nameTextShadow}; top: ${nameTop};">${data.name}</div>
             
             <!-- QR Code -->
             <div class="qr-code">

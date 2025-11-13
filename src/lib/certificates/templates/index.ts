@@ -17,7 +17,9 @@
 export const TEMPLATE_PATHS = {
   // CTRL+THINK Event Template
   'ctrl-think-2025': '/assets/images/templates/ctrl_think.jpg',
-  'Astrix': '/assets/images/templates/astrix.jpg'
+  'Astrix': '/assets/images/templates/astrix.jpg',
+  // Cyber Security Workshop
+  'cyber-security-2025': '/assets/images/templates/cyber_security.jpg',
   
   // Future event templates - add here:
   // 'innovathon-2024': '/assets/images/templates/innovathon.jpg',
@@ -59,6 +61,30 @@ export const TEMPLATE_POSITIONS = {
       fontSize: 24,
       fontFamily: 'Arial, sans-serif',
       color: '#333333',
+      align: 'center' as const,
+    },
+  },
+  'cyber-security-2025': {
+    name: {
+      x: 600,
+      y: 420,
+      fontSize: 48,
+      fontFamily: 'Georgia, serif',
+      color: '#ffffff',
+      align: 'center' as const,
+      textTransform: 'none' as const,
+    },
+    qrCode: {
+      x: 900,
+      y: 600,
+      size: 120,
+    },
+    teamName: {
+      x: 600,
+      y: 500,
+      fontSize: 22,
+      fontFamily: 'Arial, sans-serif',
+      color: '#cccccc',
       align: 'center' as const,
     },
   },

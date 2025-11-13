@@ -1,11 +1,13 @@
 // Central export for all event configurations and certificates
 
 import { ctrlThinkConfig, ctrlThinkCertificates } from './ctrl-think-2025';
+import { cyberSecurityConfig, cyberSecurityCertificates } from './cyber-security-2025';
 import type { EventConfig, CertificateData } from '../types';
 
 // Registry of all events
 export const eventRegistry: Record<string, EventConfig> = {
   'ctrl-think-2025': ctrlThinkConfig,
+  'cyber-security-2025': cyberSecurityConfig,
   // Add more events here as they are created:
   // 'innovathon-2024': innovathonConfig,
   // 'tech-talk-2024': techTalkConfig,
@@ -14,6 +16,7 @@ export const eventRegistry: Record<string, EventConfig> = {
 // Registry of all certificates by event
 export const certificateRegistry: Record<string, CertificateData[]> = {
   'ctrl-think-2025': ctrlThinkCertificates,
+  'cyber-security-2025': cyberSecurityCertificates,
   // Add more certificate arrays here:
   // 'innovathon-2024': innovathonCertificates,
   // 'tech-talk-2024': techTalkCertificates,
@@ -40,4 +43,4 @@ export function getAllEvents(): EventConfig[] {
 }
 
 // Export individual event data for backward compatibility
-export { ctrlThinkConfig, ctrlThinkCertificates };
+export { ctrlThinkConfig, ctrlThinkCertificates, cyberSecurityConfig, cyberSecurityCertificates };
