@@ -81,7 +81,7 @@ A comprehensive, scalable certificate management system supporting multiple even
 
 | Event | Certificates | Status |
 |-------|-------------|--------|
-| CTRL+THINK 2024 | 70 participants, 21 teams | ✅ Active |
+| CTRL+THINK 2025 | 70 participants, 21 teams | ✅ Active |
 
 ### Certificate ID Format
 
