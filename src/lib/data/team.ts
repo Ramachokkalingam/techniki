@@ -28,7 +28,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: 2,
-    name: 'Sazzan',
+    name: 'Sajan',
     role: 'President',
     image: '/assets/images/team/Sazzan1.jpg',
     bio: 'Tech and robotics enthusiast with an entrepreneurial mindset, passionate about exploring innovative ideas and building solutions that make an impact',
@@ -52,6 +52,17 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: 4,
+    name: 'Manav',
+    role: 'Management Core',
+    image: '/assets/images/team/manav1.jpeg',
+    bio: 'I plan and coordinate engaging club events, ensuring they run smoothly. Outside of this, I enjoy exploring new ideas, trying new things, and continuously learning new skills.',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/manav-raghav',
+      instagram: 'https://www.instagram.com/rag_manav?igsh=cHhxZGlsY3l3dGNy',
+    },
+  },
+  {
+    id: 5,
     name: 'Priyanshi',
     role: 'Tech Core',
     image: '/assets/images/team/Priyanshi.jpg',
@@ -62,7 +73,7 @@ export const teamMembers: TeamMember[] = [
     },
   },
   {
-    id: 5,
+    id: 6,
     name: 'Sampriya',
     role: 'Tech Core',
     image: '/assets/images/team/sampriya.jpg',
@@ -73,7 +84,7 @@ export const teamMembers: TeamMember[] = [
     },
   },
   {
-    id: 6,
+    id: 7,
     name: 'Kabir',
     role: 'Tech Core',
     image: '/assets/images/team/kabir.jpg',
@@ -85,7 +96,7 @@ export const teamMembers: TeamMember[] = [
     },
   },
   {
-    id: 7,
+    id: 8,
     name: 'Sahib',
     role: 'Tech Core',
     image: '/assets/images/team/sahib.jpg',
@@ -97,23 +108,16 @@ export const teamMembers: TeamMember[] = [
     },
   },
   {
-    id: 8,
-    name: 'Yash',
-    role: 'Tech Core',
-    image: '/assets/images/team/yash.jpg',
-    bio: 'Passionate about AI/ML, IoT, and Robotics. Leading Techniki to empower the next generation of tech innovators.',
-    social: {},
-  },
-  {
     id: 9,
-    name: 'Ansh',
+    name: 'Nikhil',
     role: 'Tech Core',
-    image: '/assets/images/team/ansh.jpg',
-    bio: 'passionate about Artificial Intelligence, Machine Learning. By combining leadership with technology, I focus on collaboration and innovation to create impactful solutions that drive real change.',
+    image: '/assets/images/team/nikhil.jpeg',
+    bio: 'Passionate about Web Devlopment and DataScience. I contribute to design and develop web solutions for club activities and events',
     social: {
-      instagram: 'http://www.instagram.com/anshhrao',
+      github: 'https://github.com/nikhilx133',
     },
   },
+  
   {
     id: 10,
     name: 'Saksham',
@@ -137,23 +141,37 @@ export const teamMembers: TeamMember[] = [
       github: 'https://github.com/PrachiStack',
     },
   },
+  
   {
     id: 12,
-    name: 'Immanuel',
-    role: 'Tech Core',
-    image: '/assets/images/team/Immanuel.jpg',
-    bio: 'Passionate about AI/ML, IoT, and Robotics. Leading Techniki to empower the next generation of tech innovators.',
-    social: {
-      linkedin: 'https://www.linkedin.com/in/immanuel-shadrach/',
-      github: 'https://github.com/ImmanuelShadrach',
-    },
-  },
-  {
-    id: 13,
     name: 'Kunal',
     role: 'Tech Core',
     image: '/assets/images/team/kunal.jpg',
     bio: 'Passionate web developer skilled in building responsive, user-friendly websites and web applications. Focused on clean code and modern design',
     social: {},
   },
+  {
+    id: 13,
+    name: 'Debojit Dey',
+    role: 'CyberSecurity Core',
+    image: '/assets/images/team/devojit.jpeg',
+    bio: 'Passionate aspiring cybersecurity enthusiast and game developer , blending hands-on hacking skills with creative coding projects.',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/debojit-dey-88882124a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      github: 'https://github.com/Dev6848',
+    },
+  },
+  {
+    id: 14,
+    name: 'Sameer',
+    role: 'Cybersecurity Lead',
+    image: '/assets/images/team/sameer1.jpeg',
+    bio: 'I am a passionate Cybersecurity enthusiast fully focused towards blue teaming (SOC) and ethical hacking. Also I just entered the path of devops engineering journey.',
+    social: {
+      github: 'https://github.com/thecybersameer',
+    },
+  },
+
+
+
 ];
