@@ -11,7 +11,9 @@ export const metadata: Metadata = {
   title: 'Techनिकी - Empowering Innovation in Technology',
   description: 'Join Techनिकी, the premier tech community for AI, ML, Web Development, AR, and VR enthusiasts.',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
   },
 };
 
