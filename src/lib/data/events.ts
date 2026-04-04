@@ -14,7 +14,20 @@ export interface Event {
 }
 
 export const upcomingEvents: Event[] = [
-
+  {
+    id: 'ai-computervision',
+    title: 'Foundations & Frontiers of Computer Vision',
+    category: 'Workshop',
+    date: 'April 7, 2026',
+    status: 'upcoming',
+    description: 'Join us for an exciting hands-on workshop on Computer Vision — from the basics to cutting-edge real-world applications with OpenCV, PyTorch & YOLOv8.',
+    image: '/assets/images/events/image.png',
+    gradient: 'from-blue-500 to-purple-600',
+    icon: 'eye',
+    participants: 'Registration Open',
+    link: '/events/AI-ComputerVision',
+    detailsPage: '/events/AI-ComputerVision',
+  },
   {
     id: 'techniki-tt',
     title: 'Techniki TT',

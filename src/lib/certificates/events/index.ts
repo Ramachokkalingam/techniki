@@ -2,12 +2,14 @@
 
 import { ctrlThinkConfig, ctrlThinkCertificates } from './ctrl-think-2025';
 import { cyberSecurityConfig, cyberSecurityCertificates } from './cyber-security-2025';
+import { aiComputerVisionConfig, aiComputerVisionCertificates } from './AI_ComputerVision';
 import type { EventConfig, CertificateData } from '../types';
 
 // Registry of all events
 export const eventRegistry: Record<string, EventConfig> = {
   'ctrl-think-2025': ctrlThinkConfig,
   'cyber-security-2025': cyberSecurityConfig,
+  'computer-vision-2026': aiComputerVisionConfig,
   // Add more events here as they are created:
   // 'innovathon-2024': innovathonConfig,
   // 'tech-talk-2024': techTalkConfig,
@@ -17,6 +19,7 @@ export const eventRegistry: Record<string, EventConfig> = {
 export const certificateRegistry: Record<string, CertificateData[]> = {
   'ctrl-think-2025': ctrlThinkCertificates,
   'cyber-security-2025': cyberSecurityCertificates,
+  'computer-vision-2026': aiComputerVisionCertificates,
   // Add more certificate arrays here:
   // 'innovathon-2024': innovathonCertificates,
   // 'tech-talk-2024': techTalkCertificates,
@@ -43,4 +46,4 @@ export function getAllEvents(): EventConfig[] {
 }
 
 // Export individual event data for backward compatibility
-export { ctrlThinkConfig, ctrlThinkCertificates, cyberSecurityConfig, cyberSecurityCertificates };
+export { ctrlThinkConfig, ctrlThinkCertificates, cyberSecurityConfig, cyberSecurityCertificates, aiComputerVisionConfig, aiComputerVisionCertificates };
