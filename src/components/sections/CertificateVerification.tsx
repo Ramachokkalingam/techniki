@@ -77,6 +77,7 @@ export default function CertificateVerification() {
         certificateId: certificate.certificateId,
         templatePath: eventConfig?.templatePath,
         teamName: certificate.teamName,
+        eventId: certificate.eventId,
       });
     } catch (err) {
       setError('Failed to generate certificate. Please try again.');
