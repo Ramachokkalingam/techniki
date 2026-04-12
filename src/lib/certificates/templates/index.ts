@@ -20,7 +20,9 @@ export const TEMPLATE_PATHS = {
   'Astrix': '/assets/images/templates/astrix.jpg',
   // Cyber Security Workshop
   'cyber-security-2025': '/assets/images/templates/cyber_security.jpg',
-  
+  // Computer Vision Workshop
+  'cv-workshop-2026': '/assets/images/templates/CVworkshop.png',
+
   // Future event templates - add here:
   // 'innovathon-2024': '/assets/images/templates/innovathon.jpg',
   // 'tech-talk-2024': '/assets/images/templates/tech_talk.jpg',
@@ -89,6 +91,31 @@ export const TEMPLATE_POSITIONS = {
     },
   },
   
+  'cv-workshop-2026': {
+    name: {
+      x: 600,
+      y: 333,
+      fontSize: 40,
+      fontFamily: "'Playfair Display', Georgia, serif",
+      color: '#ffffff',
+      align: 'center' as const,
+      textTransform: 'none' as const,
+    },
+    qrCode: {
+      x: 1045,
+      y: 540,
+      size: 60,
+    },
+    teamName: {
+      x: 600,
+      y: 435,
+      fontSize: 22,
+      fontFamily: 'Arial, sans-serif',
+      color: '#cccccc',
+      align: 'center' as const,
+    },
+  },
+
   // Add positioning for future events here
 } as const;
 
