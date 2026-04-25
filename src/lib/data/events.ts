@@ -25,8 +25,8 @@ export const upcomingEvents: Event[] = [
     gradient: 'from-blue-500 to-purple-600',
     icon: 'eye',
     participants: 'Registration Open',
-    link: '/events/AI-ComputerVision',
-    detailsPage: '/events/AI-ComputerVision',
+    link: '/events/ai-computervision',
+    detailsPage: '/events/ai-computervision',
   },
   {
     id: 'techniki-tt',

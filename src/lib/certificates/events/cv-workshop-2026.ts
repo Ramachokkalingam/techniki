@@ -9,7 +9,7 @@ export const cvWorkshopConfig: EventConfig = {
   eventDate: '7th April 2026',
   issueDate: '7th April 2026',
   certificatePrefix: 'TECH-CV-2026',
-  templatePath: TEMPLATE_PATHS['cv-workshop-2026'],
+  templatePath: TEMPLATE_PATHS["cv-workshop-2026"],
   templateConfig: {
     type: 'overlay',
     dimensions: {
