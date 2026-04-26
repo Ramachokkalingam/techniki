@@ -21,8 +21,8 @@ export const TEMPLATE_PATHS = {
   // Cyber Security Workshop
   'cyber-security-2025': '/assets/images/templates/cyber_security.jpg',
   // Computer Vision Workshop
-  'computer-vision-2026': '/assets/images/templates/computer_vision.jpg',
-  'cv-workshop-2026': '/assets/images/templates/computer_vision.jpg',
+  'computer-vision-2026': '/assets/images/templates/CVworkshop.png',
+  'cv-workshop-2026': '/assets/images/templates/CVworkshop.png',
   
   // Future event templates - add here:
   // 'innovathon-2024': '/assets/images/templates/innovathon.jpg',
