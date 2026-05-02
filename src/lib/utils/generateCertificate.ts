@@ -18,11 +18,11 @@ interface TemplatePosition {
 
 const POSITIONS: Record<string, TemplatePosition> = {
   'ctrl-think-2025': {
-    name:   { x: 600, y: 450, fontSize: 48, color: '#000000', fontFamily: 'Georgia, serif', align: 'center' },
+    name:   { x: 780, y: 330, fontSize: 48, color: '#000000', fontFamily: 'Georgia, serif', align: 'center' },
     qrCode: { x: 900, y: 600, size: 120 },
   },
   'cyber-security-2025': {
-    name:   { x: 600, y: 420, fontSize: 48, color: '#ffffff', fontFamily: 'Georgia, serif', align: 'center' },
+    name:   { x: 780, y: 330, fontSize: 48, color: '#ffffff', fontFamily: 'Georgia, serif', align: 'center' },
     qrCode: { x: 900, y: 600, size: 120 },
   },
 'cv-workshop-2026': {
