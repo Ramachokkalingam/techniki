@@ -25,10 +25,17 @@ const POSITIONS: Record<string, TemplatePosition> = {
     name:   { x: 600, y: 420, fontSize: 48, color: '#ffffff', fontFamily: 'Georgia, serif', align: 'center' },
     qrCode: { x: 900, y: 600, size: 120 },
   },
-  'cv-workshop-2026': {
-    name:   { x: 600, y: 130, fontSize: 42, color: '#ffffff', fontFamily: "'Playfair Display', Georgia, serif", align: 'center' },
-    qrCode: { x: 1050, y: 580, size: 80 },
+'cv-workshop-2026': {
+  name: { 
+    x: 780, 
+    y: 330,   // ✅ FIXED (pehle 130 tha)
+    fontSize: 42, 
+    color: '#ffffff', 
+    fontFamily: "'Playfair Display', Georgia, serif", 
+    align: 'center' 
   },
+  qrCode: { x: 1050, y: 580, size: 80 },
+},
 };
 
 const DEFAULT_POSITION: TemplatePosition = POSITIONS['ctrl-think-2025'];
