@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Editor/scratch leftovers
+*.backup
+*.bak
+*.orig
+temp
+temp.*
+temp_file
+
+# Personal shell config — belongs in your dotfiles, not the repo
+.zsh
