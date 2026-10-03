@@ -66,15 +66,15 @@ export default function ComputerVisionWorkshopPage() {
               </p>
               {/* Event Details Pills */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <div className="glass-card px-6 py-3 rounded-full bg-white/10 backdrop-blur">
+                <div className="glass-card px-6 py-3 rounded-full">
                   <i className="fas fa-calendar mr-2 text-cyan-400"></i>
                   <span className="text-white font-semibold">April 7, 2026</span>
                 </div>
-                <div className="glass-card px-6 py-3 rounded-full bg-white/10 backdrop-blur">
+                <div className="glass-card px-6 py-3 rounded-full">
                   <i className="fas fa-clock mr-2 text-orange-400"></i>
                   <span className="text-white font-semibold">9:30 AM – 1:00 PM</span>
                 </div>
-                <div className="glass-card px-6 py-3 rounded-full bg-white/10 backdrop-blur">
+                <div className="glass-card px-6 py-3 rounded-full">
                   <i className="fas fa-map-marker-alt mr-2 text-blue-400"></i>
                   <span className="text-white font-semibold">Venue: C-214</span>
                 </div>
@@ -103,7 +103,7 @@ export default function ComputerVisionWorkshopPage() {
       {/* Registration Form */}
       <section className="py-12 px-4">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-700 p-8">
+          <div className="glass-panel rounded-2xl p-8">
             <h2 className="text-3xl font-bold mb-2 text-center">Workshop Registration</h2>
             <p className="text-center text-gray-400 text-sm mb-8">
               Fill in your details to register for the hands-on Computer Vision Workshop

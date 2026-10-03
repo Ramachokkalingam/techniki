@@ -23,7 +23,7 @@ export default function AmbassadorPage() {
         </div>
 
         {/* What is CA Program */}
-        <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
+        <div className="glass-panel rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">
             What is the Campus Ambassador Program?
           </h2>
@@ -39,7 +39,7 @@ export default function AmbassadorPage() {
             Ambassador Benefits
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-green-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-certificate text-green-400 text-2xl"></i>
               </div>
@@ -47,7 +47,7 @@ export default function AmbassadorPage() {
               <p className="text-gray-400">Receive an official Campus Ambassador certificate</p>
             </div>
 
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-blue-500/20 hover:border-blue-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-blue-500/20 hover:border-blue-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-award text-blue-400 text-2xl"></i>
               </div>
@@ -55,7 +55,7 @@ export default function AmbassadorPage() {
               <p className="text-gray-400">Get a LoR from Techनिकी leadership</p>
             </div>
 
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-users text-purple-400 text-2xl"></i>
               </div>
@@ -63,7 +63,7 @@ export default function AmbassadorPage() {
               <p className="text-gray-400">Access to ambassador-only networking events</p>
             </div>
 
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-yellow-500/20 hover:border-yellow-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-yellow-500/20 hover:border-yellow-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-yellow-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-gift text-yellow-400 text-2xl"></i>
               </div>
@@ -71,7 +71,7 @@ export default function AmbassadorPage() {
               <p className="text-gray-400">Techनिकी merchandise and goodies</p>
             </div>
 
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-red-500/20 hover:border-red-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-red-500/20 hover:border-red-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-red-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-graduation-cap text-red-400 text-2xl"></i>
               </div>
@@ -79,7 +79,7 @@ export default function AmbassadorPage() {
               <p className="text-gray-400">Develop organizational and leadership skills</p>
             </div>
 
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-indigo-500/20 hover:border-indigo-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-indigo-500/20 hover:border-indigo-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-indigo-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-star text-indigo-400 text-2xl"></i>
               </div>
@@ -90,7 +90,7 @@ export default function AmbassadorPage() {
         </div>
 
         {/* Responsibilities */}
-        <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
+        <div className="glass-panel rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
             Your Responsibilities
           </h2>
@@ -158,7 +158,7 @@ export default function AmbassadorPage() {
         </div>
 
         {/* Eligibility */}
-        <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
+        <div className="glass-panel rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
             Who Can Apply?
           </h2>
@@ -187,7 +187,7 @@ export default function AmbassadorPage() {
         </div>
 
         {/* Selection Process */}
-        <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
+        <div className="glass-panel rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
             Selection Process
           </h2>

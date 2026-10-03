@@ -18,7 +18,7 @@ const categoryColors: Record<string, string> = {
 export default function EventCard({ event }: EventCardProps) {
   const CardContent = (
     <div
-      className="event-card glass-card rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 cursor-pointer"
+      className="event-card glass-card rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-500"
       data-aos="fade-up"
     >
       <div className="relative">
@@ -29,7 +29,9 @@ export default function EventCard({ event }: EventCardProps) {
               alt={event.title}
               width={400}
               height={300}
-              className="w-full h-full object-cover scale-105"
+              className={`w-full h-full object-cover scale-105 ${
+                event.imagePosition === 'top' ? 'object-top' : ''
+              }`}
             />
           </div>
         ) : (
@@ -69,16 +71,27 @@ export default function EventCard({ event }: EventCardProps) {
           <span className="text-yellow-400 font-semibold">
             {event.participants}
           </span>
-          <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
-            {event.status === 'upcoming' ? 'Register Now' : 'View Details'}
-          </span>
+          {event.status === 'upcoming' && event.registerUrl ? (
+            <a
+              href={event.registerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
+            >
+              Register Now
+            </a>
+          ) : (
+            <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              {event.status === 'upcoming' ? 'Register Now' : 'View Details'}
+            </span>
+          )}
         </div>
       </div>
     </div>
   );
 
   // Make entire card clickable if it has a detailsPage or link
-  if (event.detailsPage || event.link) {
+  if (!event.registerUrl && (event.detailsPage || event.link)) {
     return (
       <Link href={event.detailsPage || event.link || '#'} className="block">
         {CardContent}

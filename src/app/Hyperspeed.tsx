@@ -904,6 +904,8 @@ const roadVertex = `
   }
 `;
 
+const MAX_PIXEL_RATIO = 1.5;
+
 function resizeRendererToDisplaySize(
   renderer: THREE.WebGLRenderer,
   setSize: (width: number, height: number, updateStyle: boolean) => void
@@ -911,7 +913,12 @@ function resizeRendererToDisplaySize(
   const canvas = renderer.domElement;
   const width = canvas.clientWidth;
   const height = canvas.clientHeight;
-  const needResize = canvas.width !== width || canvas.height !== height;
+  // canvas.width is in device pixels, clientWidth in CSS pixels: compare like
+  // with like, otherwise any scaled display (e.g. 125%/150%) reports a
+  // "resize" on every single frame.
+  const dpr = renderer.getPixelRatio();
+  const needResize =
+    canvas.width !== Math.floor(width * dpr) || canvas.height !== Math.floor(height * dpr);
   if (needResize) {
     setSize(width, height, false);
   }
@@ -955,7 +962,10 @@ class App {
       alpha: true
     });
     this.renderer.setSize(container.offsetWidth, container.offsetHeight, false);
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    // Cap pixel ratio: the glass layers above re-blur this canvas every frame,
+    // so rendering it at 2-3x resolution only costs performance (it sits
+    // behind blur anyway).
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO));
 
     this.composer = new EffectComposer(this.renderer);
     container.appendChild(this.renderer.domElement);

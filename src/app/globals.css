@@ -1,19 +1,205 @@
 @import "tailwindcss";
 
-/* Custom Utility Classes */
+/* ==========================================================================
+   Frosted-glass design system
+   --------------------------------------------------------------------------
+   Performance rules this file follows (don't undo them casually):
+   1. backdrop-filter is the expensive part. Its cost grows with blur radius
+      x area, and it re-runs every time what's *behind* it changes (our
+      background is an animated canvas). So: moderate radius, no nesting,
+      and no animating of blur/background/box-shadow. Only transform and
+      opacity are animated.
+   2. Depth comes from cheap static layers (gradients + inset shadows), not
+      from extra blur.
+   3. Everything degrades: no backdrop-filter support, reduced transparency,
+      reduced motion, small screens.
+   ========================================================================== */
+
+:root {
+  /* Fluid blur radius: r(vw) = clamp(12px, 8px + 0.5vw, 20px)
+     -> 12px on phones, ~16px on laptops, 20px max on huge monitors. */
+  --glass-blur: clamp(12px, 8px + 0.5vw, 20px);
+  --glass-saturate: 1.6;
+
+  --glass-fill: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.13) 0%,
+    rgba(255, 255, 255, 0.045) 45%,
+    rgba(255, 255, 255, 0.075) 100%
+  );
+  --glass-fill-dark: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(10, 10, 25, 0.38) 55%,
+    rgba(10, 10, 25, 0.48) 100%
+  );
+  --glass-border: rgba(255, 255, 255, 0.13);
+
+  /* Static "rim light": bright top edge, faint bottom edge, soft inner glow,
+     then a soft drop shadow. Pure paint, no per-frame cost. */
+  --glass-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 0 22px rgba(255, 255, 255, 0.035),
+    0 18px 40px -14px rgba(0, 0, 0, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.18);
+
+  /* Spring easing: damped harmonic oscillator
+       x(t) = 1 - e^(-zeta*w0*t) * ( cos(wd*t) + (zeta*w0/wd) * sin(wd*t) )
+       zeta = 0.62, w0 = 10, wd = w0*sqrt(1 - zeta^2)
+     sampled at 36 points (peak overshoot ~8%, settles by t = 1).
+     Fallback below is a close cubic-bezier for older browsers. */
+  --ease-spring: cubic-bezier(0.34, 1.35, 0.64, 1);
+}
+
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    --ease-spring: linear(0, 0.034, 0.121, 0.24, 0.373, 0.508, 0.636, 0.75, 0.847, 0.926, 0.986, 1.03, 1.059, 1.076, 1.083, 1.083, 1.077, 1.068, 1.057, 1.046, 1.035, 1.025, 1.016, 1.009, 1.003, 0.999, 0.996, 0.994, 0.993, 0.993, 0.993, 0.994, 0.995, 0.996, 0.997, 0.998, 1);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --glass-blur: 10px; /* cheaper on phones */
+  }
+}
+
 @layer components {
+  /* ---- Shared glass surface ------------------------------------------- */
+  .glass-card,
+  .glass-panel,
+  .glass-nav {
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
   .glass-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    position: relative;
+    isolation: isolate;
+    background: var(--glass-fill);
+  }
+
+  /* Darker tint for text-heavy panels (better contrast than pure glass) */
+  .glass-panel {
+    position: relative;
+    isolation: isolate;
+    background: var(--glass-fill-dark);
+  }
+
+  /* Full-width bars (navbar / footer): no rounded corners, no drop shadow */
+  .glass-nav {
+    background: linear-gradient(
+      180deg,
+      rgba(20, 20, 40, 0.62) 0%,
+      rgba(10, 10, 25, 0.5) 100%
+    );
+    border-width: 0 0 1px 0;
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* Use the spring curve (and a duration that suits it) for any Tailwind
+     transition utility on a glass surface: hover:scale-105 etc. */
+  .glass-card,
+  .glass-panel {
+    --tw-ease: var(--ease-spring);
+    --default-transition-duration: 600ms;
+  }
+
+  /* Glass inside glass would blur twice for no visible gain: skip it */
+  :is(.glass-card, .glass-panel, .glass-nav) :is(.glass-card, .glass-panel, .glass-nav) {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  /* ---- Pointer light (specular highlight) -----------------------------
+     Position (--mx, --my) is set by GlassEffects.tsx. It sits *behind*
+     the card content (z-index:-1 inside the card's stacking context), and
+     only its opacity is transitioned. */
+  .glass-card::before,
+  .glass-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 450ms ease-out;
+    background: radial-gradient(
+      380px circle at var(--mx, 50%) var(--my, 0%),
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 255, 255, 0.05) 40%,
+      rgba(255, 255, 255, 0) 70%
+    );
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .glass-card:hover::before,
+    .glass-panel:hover::before {
+      opacity: 1;
+    }
   }
 
   .hero-btn {
     display: inline-block;
     font-weight: 600;
     transition: all 0.3s ease;
+  }
+
+  /* Glass pill button (secondary buttons) */
+  .glass-pill {
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    background: var(--glass-fill);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      0 8px 20px -8px rgba(0, 0, 0, 0.5);
+    --tw-ease: var(--ease-spring);
+    --default-transition-duration: 500ms;
+  }
+}
+
+/* ---- Graceful fallbacks ------------------------------------------------ */
+
+/* Browser without backdrop-filter: make the fill more opaque so text stays
+   readable instead of looking washed out. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-card,
+  .glass-panel,
+  .glass-pill {
+    background: rgba(30, 30, 55, 0.88);
+  }
+  .glass-nav {
+    background: rgba(12, 12, 28, 0.94);
+  }
+}
+
+/* OS-level "Reduce transparency": no blur at all, solid readable surfaces */
+@media (prefers-reduced-transparency: reduce) {
+  .glass-card,
+  .glass-panel,
+  .glass-nav,
+  .glass-pill {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(24, 24, 46, 0.95);
+  }
+}
+
+/* "Reduce motion": drop the pointer light and spring animation */
+@media (prefers-reduced-motion: reduce) {
+  .glass-card::before,
+  .glass-panel::before {
+    display: none;
+  }
+  .glass-card,
+  .glass-panel,
+  .glass-pill {
+    --tw-ease: ease-out;
+    --default-transition-duration: 150ms;
   }
 }
 

@@ -11,21 +11,42 @@ export interface Event {
   participants?: string;
   link?: string;
   detailsPage?: string;
+  registerUrl?: string; // external registration form (opens in a new tab)
+  imagePosition?: 'top' | 'center'; // how a tall banner is cropped in the card
 }
 
 export const upcomingEvents: Event[] = [
+  {
+    id: 'ctrl-think-2',
+    title: 'CTRL+THINK 2.0 - From Hackathon to Startups',
+    category: 'Hackathon',
+    date: 'October 9–10, 2026',
+    status: 'upcoming',
+    description:
+      'A 24-hour overnight hackathon at Deja Brew for Amity University Gurugram students. Teams of 2–4 build a prototype and pitch it for a total prize pool of ₹12,000. Registration is free; shortlisted teams pay ₹199 per team.',
+    image: '/assets/images/events/ctrl-think-2-banner.jpg',
+    imagePosition: 'top',
+    gradient: 'from-purple-600 to-blue-700',
+    icon: 'lightbulb',
+    participants: '₹12,000 Prize Pool',
+    registerUrl:
+      'https://docs.google.com/forms/d/e/1FAIpQLSeYsiGI3KCn8HVQblC7oXKRSHrgD_7o20nLj28LxYJAljzljA/viewform?usp=publish-editor',
+  },
+];
+
+export const pastEvents: Event[] = [
   {
     id: 'ai-computervision',
     title: 'Foundations & Frontiers of Computer Vision',
     category: 'Workshop',
     date: 'April 7, 2026',
-    status: 'upcoming',
-    description: 'Join us for an exciting hands-on workshop on Computer Vision — from the basics to cutting-edge real-world applications with OpenCV, PyTorch & YOLOv8.',
+    status: 'completed',
+    description:
+      'A hands-on workshop on Computer Vision — from the basics to cutting-edge real-world applications with OpenCV, PyTorch & YOLOv8.',
     image: '/assets/images/events/image.png',
     gradient: 'from-blue-500 to-purple-600',
     icon: 'eye',
-    participants: 'Registration Open',
-    link: '/events/ai-computervision',
+    participants: 'Workshop Completed',
     detailsPage: '/events/ai-computervision',
   },
   {
@@ -33,19 +54,15 @@ export const upcomingEvents: Event[] = [
     title: 'Techniki TT',
     category: 'Competition',
     date: 'Sep 2025',
-    status: 'upcoming',
+    status: 'completed',
     description:
-      'Join Techniki Teams to turn your ideas into reality with mentorship, teamwork, and national opportunities!',
+      'Techniki Teams helped students turn ideas into reality with mentorship, teamwork, and national opportunities.',
     image: '/assets/images/events/Techniki TT.jpg',
     gradient: 'from-blue-500 to-blue-700',
     icon: 'trophy',
-    participants: 'Registration Open',
-    link: '/events/techniki-tt',
+    participants: 'Event Completed',
     detailsPage: '/events/techniki-tt',
   },
-];
-
-export const pastEvents: Event[] = [
     {
     id: 'ethical-hacking-workshop',
     title: 'Ethical Hacking Workshop',

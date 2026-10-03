@@ -4,6 +4,7 @@ import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import HyperspeedBackground from '@/components/layout/HyperspeedBackground';
+import GlassEffects from '@/components/layout/GlassEffects';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -40,6 +41,7 @@ export default function RootLayout({
         {/* Global Hyperspeed Background */}
         <HyperspeedBackground />
 
+        <GlassEffects />
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />

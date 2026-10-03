@@ -43,7 +43,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/events"
-                className="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/20 transition-all flex items-center gap-2"
+                className="glass-pill text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform flex items-center gap-2"
               >
                 <i className="fas fa-calendar"></i>
                 Explore Events

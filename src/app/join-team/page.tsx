@@ -20,7 +20,7 @@ export default function JoinTeamPage() {
         </div>
 
         {/* Why Join Section */}
-        <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
+        <div className="glass-panel rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
             Why Join Our Team?
           </h2>
@@ -74,7 +74,7 @@ export default function JoinTeamPage() {
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Technical Team */}
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-blue-500/20 hover:border-blue-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-blue-500/20 hover:border-blue-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-code text-blue-400 text-2xl"></i>
               </div>
@@ -88,7 +88,7 @@ export default function JoinTeamPage() {
             </div>
 
             {/* Design Team */}
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-palette text-purple-400 text-2xl"></i>
               </div>
@@ -102,7 +102,7 @@ export default function JoinTeamPage() {
             </div>
 
             {/* Content Team */}
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-green-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-pen text-green-400 text-2xl"></i>
               </div>
@@ -116,7 +116,7 @@ export default function JoinTeamPage() {
             </div>
 
             {/* Event Management */}
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-red-500/20 hover:border-red-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-red-500/20 hover:border-red-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-red-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-calendar-check text-red-400 text-2xl"></i>
               </div>
@@ -130,7 +130,7 @@ export default function JoinTeamPage() {
             </div>
 
             {/* Marketing Team */}
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-yellow-500/20 hover:border-yellow-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-yellow-500/20 hover:border-yellow-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-yellow-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-bullhorn text-yellow-400 text-2xl"></i>
               </div>
@@ -144,7 +144,7 @@ export default function JoinTeamPage() {
             </div>
 
             {/* Operations Team */}
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-indigo-500/20 hover:border-indigo-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-indigo-500/20 hover:border-indigo-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-indigo-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-cogs text-indigo-400 text-2xl"></i>
               </div>
@@ -160,7 +160,7 @@ export default function JoinTeamPage() {
         </div>
 
         {/* Application Process */}
-        <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
+        <div className="glass-panel rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
             Application Process
           </h2>

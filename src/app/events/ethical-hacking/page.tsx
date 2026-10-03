@@ -29,7 +29,7 @@ export default function EthicalHackingRegistration() {
           {/* Registration Form Container */}
           <div className="max-w-9xl mx-auto">
             <div 
-              className="glass-card p-8 rounded-2xl backdrop-blur-sm bg-white/10 border border-white/20"
+              className="glass-card p-8 rounded-2xl"
               data-aos="fade-up"
               data-aos-delay="200"
             >
