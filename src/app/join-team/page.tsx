@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Join Our Team - Techनिकी',
-  description: 'Become a core team member of Techनिकी and help build the future of tech community',
+  title: 'Join Our Team - Techniki',
+  description: 'Become a core team member of Techniki and help build the future of tech community',
 };
 
 export default function JoinTeamPage() {

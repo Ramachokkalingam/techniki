@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-3 group">
               <span className="text-xl font-bold group-hover:text-blue-400 transition-colors">
-                Tech<span className="brand-gradient">निकी</span>
+                Tech<span className="brand-gradient">niki</span>
               </span>
             </Link>
             <p className="text-gray-300 leading-relaxed text-sm md:text-base">
@@ -139,7 +139,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-700 pt-6 text-center">
           <p className="text-gray-400 text-sm">
-            &copy; {currentYear} Techनिकी. All rights reserved. Built with ❤️
+            &copy; {currentYear} Techniki. All rights reserved. Built with ❤️
             by the Techniki Team.
           </p>
         </div>

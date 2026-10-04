@@ -16,7 +16,7 @@ export default function CtrlThinkPage() {
               Workshop
             </p>
             <p className="text-lg text-gray-400 mb-8">
-              Organized by Techनिकी @ Amity University Haryana
+              Organized by Techniki @ Amity University Haryana
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <div className="glass-card px-6 py-3 rounded-full">
@@ -45,7 +45,7 @@ export default function CtrlThinkPage() {
             </h2>
             <div className="glass-card p-8 rounded-2xl mb-12">
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-               Git & GitHub Workshop was a hands-on session organized by Techनिकी on 
+               Git & GitHub Workshop was a hands-on session organized by Techniki on 
                 <strong className="text-blue-400"> September 04, 2025</strong>, at Amity University Haryana. 
                 Git & GitHub Workshop brought together enthusiastic learners to explore version control, collaborate on real projects, and build their own portfolio websites through hands-on learning.
               </p>
@@ -298,7 +298,7 @@ export default function CtrlThinkPage() {
               Want to Participate in Future Events?
             </h2>
             <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Join Techनिकी to get notified about upcoming ideathons, hackathons, and competitions.
+              Join Techniki to get notified about upcoming ideathons, hackathons, and competitions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

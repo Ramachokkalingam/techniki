@@ -13,7 +13,7 @@ export default function TeamPage() {
         title="Meet Our "
         titleGradient="Team"
         subtitle="The Driving Force Behind Techniki"
-        description="            Meet the passionate individuals behind Techनिकी&apos;s success. Our diverse team of"
+        description="            Meet the passionate individuals behind Techniki&apos;s success. Our diverse team of"
         primaryButton={{
           text: 'Join Our Team',
           href: '/join',

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Campus Ambassador Program - Techनिकी',
-  description: 'Become a Techनिकी Campus Ambassador and represent us across India',
+  title: 'Campus Ambassador Program - Techniki',
+  description: 'Become a Techniki Campus Ambassador and represent us across India',
 };
 
 export default function AmbassadorPage() {
@@ -18,7 +18,7 @@ export default function AmbassadorPage() {
             Become a <span className="text-green-400">Campus Ambassador</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-            Represent Techनिकी at your college and be the bridge between innovation and your peers
+            Represent Techniki at your college and be the bridge between innovation and your peers
           </p>
         </div>
 
@@ -29,7 +29,7 @@ export default function AmbassadorPage() {
           </h2>
           <p className="text-gray-300 text-lg leading-relaxed text-center max-w-4xl mx-auto">
             Our Campus Ambassador Program is designed to empower passionate students to become leaders in their colleges.
-            As an ambassador, you&apos;ll represent Techनिकी, organize events, and build a thriving tech community at your campus.
+            As an ambassador, you&apos;ll represent Techniki, organize events, and build a thriving tech community at your campus.
           </p>
         </div>
 
@@ -52,7 +52,7 @@ export default function AmbassadorPage() {
                 <i className="fas fa-award text-blue-400 text-2xl"></i>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">Letter of Recommendation</h3>
-              <p className="text-gray-400">Get a LoR from Techनिकी leadership</p>
+              <p className="text-gray-400">Get a LoR from Techniki leadership</p>
             </div>
 
             <div className="glass-panel rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all">
@@ -68,7 +68,7 @@ export default function AmbassadorPage() {
                 <i className="fas fa-gift text-yellow-400 text-2xl"></i>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">Exclusive Swag</h3>
-              <p className="text-gray-400">Techनिकी merchandise and goodies</p>
+              <p className="text-gray-400">Techniki merchandise and goodies</p>
             </div>
 
             <div className="glass-panel rounded-2xl p-6 border border-red-500/20 hover:border-red-500/50 transition-all">
@@ -101,7 +101,7 @@ export default function AmbassadorPage() {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-white mb-2">Promote Events</h3>
-                <p className="text-gray-400">Spread awareness about Techनिकी events at your campus</p>
+                <p className="text-gray-400">Spread awareness about Techniki events at your campus</p>
               </div>
             </div>
 
@@ -245,7 +245,7 @@ export default function AmbassadorPage() {
             Apply for Campus Ambassador
           </Link>
           <p className="text-gray-400 mt-6 text-lg">
-            Join 100+ ambassadors representing Techनिकी across India!
+            Join 100+ ambassadors representing Techniki across India!
           </p>
         </div>
       </div>

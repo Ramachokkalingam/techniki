@@ -62,7 +62,7 @@ export default function ComputerVisionWorkshopPage() {
                 LEARN. CODE. INNOVATE.
               </p>
               <p className="text-lg text-gray-400 mb-6">
-                Organized by Techनिकी @ Amity University Gurugram &nbsp;|&nbsp; Co-powered by AI Research Cluster
+                Organized by Techniki @ Amity University Gurugram &nbsp;|&nbsp; Co-powered by AI Research Cluster
               </p>
               {/* Event Details Pills */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -294,7 +294,7 @@ export default function ComputerVisionWorkshopPage() {
 
       {/* Footer */}
       <footer className="mt-16 py-8 text-center text-sm text-gray-500 border-t border-gray-800">
-        <p>© {new Date().getFullYear()} Techनिकी. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Techniki. All rights reserved.</p>
       </footer>
     </main>
   );

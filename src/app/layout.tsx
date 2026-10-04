@@ -13,8 +13,8 @@ import SpringPhysics from '@/components/layout/SpringPhysics';
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 export const metadata: Metadata = {
-  title: 'Techनिकी - Empowering Innovation in Technology',
-  description: 'Join Techनिकी, the premier tech community for AI, ML, Web Development, AR, and VR enthusiasts.',
+  title: 'Techniki - Empowering Innovation in Technology',
+  description: 'Join Techniki, the premier tech community for AI, ML, Web Development, AR, and VR enthusiasts.',
   icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.png',

@@ -23,7 +23,7 @@ export default function Home() {
             <p className="eyebrow" data-depth="0.06">Tech community &middot; Amity University Haryana</p>
             <h1 className="display mb-8 text-white drop-shadow-2xl" data-depth="0.12">
               Tech
-              <span className="brand-gradient">निकी</span>
+              <span className="brand-gradient">niki</span>
             </h1>
             <p className="text-xl md:text-3xl text-gray-100 mb-5 font-light tracking-tight drop-shadow-lg max-w-4xl mx-auto">
               Empowering Innovation Through Technology, Community, and Collaboration
@@ -64,7 +64,7 @@ export default function Home() {
           <div className="text-center mb-16" data-aos="fade-up">
             <p className="eyebrow">Who we are</p>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              About Tech<span className="brand-gradient">निकी</span>
+              About Tech<span className="brand-gradient">niki</span>
             </h2>
             <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Techniki is more than just a community—it&apos;s a movement. We bring together

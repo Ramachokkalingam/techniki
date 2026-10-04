@@ -13,14 +13,15 @@ import { useEffect } from 'react';
  * so motion overshoots slightly, settles, and carries momentum when the target
  * changes mid-flight, instead of following a fixed-duration curve.
  *
- *  - Buttons (a.hero-btn, a.glass-pill, white/gradient pills) lean toward the cursor.
  *  - Cards (.glass-card, [data-tilt]) tilt in 3D toward the cursor (rotateX/Y).
  *  - [data-depth="0.15"] elements parallax with scroll: offset = -scrollY * depth.
  *
  * One rAF loop, running only while something is still moving. Skipped on touch
  * screens (pointer effects) and for reduced motion.
  */
-const BTN = 'a.hero-btn, a.glass-pill, a[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label])';
+// Buttons are intentionally NOT pulled toward the cursor any more (they stay fixed and
+// react with a light halo instead, see globals.css). This selector matches nothing.
+const BTN = '[data-lean-to-cursor]';
 const CARD = '.glass-card, [data-tilt]';
 const K = 190; // stiffness
 const C = 17; // damping (zeta = C / (2 sqrt(K)) ~ 0.62: lively but not wobbly)

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Join Community - Techनिकी',
-  description: 'Join the Techनिकी community and connect with passionate tech enthusiasts',
+  title: 'Join Community - Techniki',
+  description: 'Join the Techniki community and connect with passionate tech enthusiasts',
 };
 
 export default function JoinCommunityPage() {

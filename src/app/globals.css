@@ -854,14 +854,20 @@ html {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(55% 42% at 88% 108%, rgb(var(--yellow-rgb) / 0.17), transparent 72%),
-    radial-gradient(38% 28% at 6% -4%, rgb(255 159 10 / 0.09), transparent 72%);
+    radial-gradient(55% 42% at 88% 108%, rgb(var(--yellow-rgb) / 0.32), transparent 72%),
+    radial-gradient(38% 28% at 6% -4%, rgb(255 159 10 / 0.2), transparent 72%),
+    radial-gradient(34% 26% at 50% 38%, rgb(var(--yellow-rgb) / 0.07), transparent 70%);
 }
 
 /* Yellow gradient lettering for निकी (slow drift of the gradient) */
 .brand-gradient {
-  background-image: var(--brand-gradient);
-  background-size: 220% 100%;
+  /* gold-foil texture: moving sheen + fine grain + the yellow gradient */
+  background-image:
+    linear-gradient(115deg, transparent 42%, rgb(255 255 255 / 0.6) 50%, transparent 58%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .95 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    var(--brand-gradient);
+  background-size: 300% 100%, 90px 90px, 220% 100%;
+  background-blend-mode: soft-light, overlay, normal;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -975,4 +981,50 @@ a[class*="border-blue-400"][class*="rounded-full"] {
 
 @media (prefers-reduced-motion: reduce) {
   .brand-gradient, .cta-stage::before { animation: none; }
+}
+
+/* ==========================================================================
+   Buttons stay fixed. They never move toward the cursor, lift or scale.
+   Instead they bloom a yellow halo ring (pure box-shadow, no layout/motion).
+   Unlayered + !important on purpose: it must beat Tailwind's hover:-translate-y,
+   active:scale and any inline transform.
+   ========================================================================== */
+:is(.hero-btn, .glass-pill, .glass-outline, .nav-cta,
+    a[class*='bg-gradient-to-r'][class*='rounded-full'],
+    button[class*='rounded-full']),
+:is(a, button)[class*='hover:scale-'],
+:is(a, button)[class*='hover:-translate-'] {
+  transition:
+    box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 200ms ease-out,
+    color 200ms ease !important;
+}
+:is(.hero-btn, .glass-pill, .glass-outline, .nav-cta,
+    a[class*='bg-gradient-to-r'][class*='rounded-full'],
+    button[class*='rounded-full'],
+    :is(a, button)[class*='hover:scale-'],
+    :is(a, button)[class*='hover:-translate-']):is(:hover, :active, :focus-visible) {
+  translate: 0 0 !important;
+  scale: 1 !important;
+  transform: none !important;
+}
+@media (hover: hover) {
+  :is(.hero-btn, .glass-pill, .glass-outline, .nav-cta,
+      a[class*='bg-gradient-to-r'][class*='rounded-full'],
+      button[class*='rounded-full']):hover {
+    filter: brightness(1.08) saturate(1.1);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.45),
+      0 0 0 1.5px rgb(var(--yellow-rgb) / 0.85),
+      0 0 0 6px rgb(var(--yellow-rgb) / 0.16),
+      0 10px 36px -8px rgb(var(--yellow-rgb) / 0.45);
+  }
+}
+:is(.hero-btn, .glass-pill, .glass-outline, .nav-cta,
+    a[class*='bg-gradient-to-r'][class*='rounded-full'],
+    button[class*='rounded-full']):active {
+  filter: brightness(0.92);
+  box-shadow:
+    inset 0 2px 6px rgb(0 0 0 / 0.25),
+    0 0 0 1.5px rgb(var(--yellow-rgb) / 0.9);
 }
