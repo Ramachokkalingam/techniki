@@ -7,6 +7,8 @@ import InteractiveBackground from '@/components/layout/InteractiveBackground';
 import GlassEffects from '@/components/layout/GlassEffects';
 import RouteProgress from '@/components/layout/RouteProgress';
 import ScrollReveal from '@/components/layout/ScrollReveal';
+import SmoothScroll from '@/components/layout/SmoothScroll';
+import MagneticButtons from '@/components/layout/MagneticButtons';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
@@ -57,6 +59,8 @@ export default function RootLayout({
         <GlassEffects />
         <RouteProgress />
         <ScrollReveal />
+        <SmoothScroll />
+        <MagneticButtons />
         <Navbar />
         <main id="main" className="flex-1">{children}</main>
         <Footer />
