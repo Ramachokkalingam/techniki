@@ -6,6 +6,11 @@
    Re-tints Tailwind's gray scale toward deep navy so every existing page
    (bg-gray-900, text-gray-300 ...) picks up the new look with no markup edits.
    ========================================================================== */
+@theme inline {
+  --font-sans: var(--font-body-face), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: var(--font-display-face), var(--font-body-face), ui-sans-serif, system-ui, sans-serif;
+}
+
 @theme {
   --default-transition-duration: 280ms;
   --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
@@ -412,8 +417,8 @@
 }
 
 /* ==========================================================================
-   Background layers (see InteractiveBackground.tsx)
-   Only transform is animated; the gradients themselves are static.
+   Background layers (see FieldBackground.tsx)
+   The needle field is drawn on the canvas; the aurora gradients are static and only transform is animated.
    ========================================================================== */
 .site-bg {
   position: fixed;
@@ -474,17 +479,6 @@
   50% { transform: translate3d(-6vw, 8vh, 0) scale(1.1); }
 }
 
-.site-bg__grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
-  background-size: 56px 56px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 20%, transparent 75%);
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 20%, transparent 75%);
-}
-
 .site-bg__canvas {
   position: absolute;
   inset: 0;
@@ -529,7 +523,9 @@ html {
 /* NOTE: no background-color on body. With one set (and html also coloured) it
    paints ABOVE the z-index:-10 background layer and hides it completely. */
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: var(--font-body-face), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.005em;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -881,21 +877,24 @@ html {
 }
 
 /* Oversized, light, tightly tracked headlines */
+h1, h2, h3, h4, .display {
+  font-family: var(--font-display);
+}
 main h1,
 main section h2 {
-  font-weight: 300;
-  letter-spacing: -0.045em;
-  line-height: 1.02;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
 }
 .glass-card h2 { font-weight: 600; letter-spacing: -0.02em; }
 .display {
   font-size: clamp(3.4rem, 11vw, 9.5rem);
   line-height: 0.92 !important;
-  letter-spacing: -0.06em !important;
-  font-weight: 300 !important;
+  letter-spacing: -0.05em !important;
+  font-weight: 350 !important;
 }
 main section h2 { font-size: clamp(2.2rem, 5.6vw, 4.4rem); }
-main h3 { letter-spacing: -0.02em; }
+main h3 { letter-spacing: -0.02em; font-weight: 600; }
 
 /* Small-caps category label */
 .eyebrow {
@@ -909,8 +908,8 @@ main h3 { letter-spacing: -0.02em; }
 }
 
 /* White primary buttons (not the round social icons, which carry aria-label) */
-a[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]),
-button[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]) {
+a[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]):not([class*="w-12"]):not([class*="w-10"]),
+button[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]):not([class*="w-12"]):not([class*="w-10"]) {
   background-image: none !important;
   background-color: #fff !important;
   color: #0a0a0a !important;
@@ -918,8 +917,8 @@ button[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]) {
   letter-spacing: -0.01em;
 }
 @media (hover: hover) {
-  a[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]):hover,
-  button[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]):hover {
+  a[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]):not([class*="w-12"]):not([class*="w-10"]):hover,
+  button[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]):not([class*="w-12"]):not([class*="w-10"]):hover {
     background-color: var(--yellow-400) !important;
     box-shadow: 0 14px 44px -10px rgb(var(--yellow-rgb) / 0.6) !important;
   }

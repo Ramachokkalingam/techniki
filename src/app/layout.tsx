@@ -1,16 +1,28 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Bricolage_Grotesque, Geist } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import InteractiveBackground from '@/components/layout/InteractiveBackground';
+import FieldBackground from '@/components/layout/FieldBackground';
 import GlassEffects from '@/components/layout/GlassEffects';
 import RouteProgress from '@/components/layout/RouteProgress';
 import ScrollReveal from '@/components/layout/ScrollReveal';
 import SmoothScroll from '@/components/layout/SmoothScroll';
 import SpringPhysics from '@/components/layout/SpringPhysics';
 
-const inter = Inter({ subsets: ['latin'], display: 'swap' });
+// Headings and big display type
+const display = Bricolage_Grotesque({
+  subsets: ['latin'],
+  variable: '--font-display-face',
+  display: 'swap',
+});
+
+// Body text, buttons and forms
+const body = Geist({
+  subsets: ['latin'],
+  variable: '--font-body-face',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Techniki - Empowering Innovation in Technology',
@@ -35,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" className={`${display.variable} ${body.variable}`}>
       <head>
         {/* Open the connection to the icon CDN early */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
@@ -49,12 +61,12 @@ export default function RootLayout({
         />
       </head>
       {/* Flex column + min-h-dvh keeps the footer pinned to the true bottom even on short pages */}
-      <body className={`${inter.className} flex min-h-dvh flex-col text-white antialiased`}>
-        {/* Global interactive background (aurora + particle network) */}
+      <body className={`flex min-h-dvh flex-col text-white antialiased`}>
+        {/* Global interactive background (aurora + magnetic needle field) */}
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <InteractiveBackground />
+        <FieldBackground />
 
         <GlassEffects />
         <RouteProgress />
