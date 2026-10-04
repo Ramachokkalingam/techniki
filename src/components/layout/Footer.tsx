@@ -4,14 +4,14 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="contact" className="glass-nav bg-black/40 border-t border-b-0 text-white py-12">
+    <footer id="contact" className="site-footer glass-nav pt-12 text-white">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mb-10">
           {/* Brand Section */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-3 group">
               <span className="text-xl font-bold group-hover:text-blue-400 transition-colors">
-                Tech<span className="text-blue-400">निकी</span>
+                Tech<span className="brand-gradient">निकी</span>
               </span>
             </Link>
             <p className="text-gray-300 leading-relaxed text-sm md:text-base">

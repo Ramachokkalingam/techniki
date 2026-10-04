@@ -836,3 +836,143 @@ html {
     animation: none;
   }
 }
+
+/* =========================================================================
+   PART 5 - cinematic look (dark, oversized light type, white CTAs, yellow accent)
+   ========================================================================= */
+:root {
+  --yellow-200: #fff1a8;
+  --yellow-400: #ffd60a;
+  --amber-500: #ff9f0a;
+  --yellow-rgb: 255 214 10;
+  --brand-gradient: linear-gradient(100deg, #fff1a8 0%, #ffd60a 38%, #ff9f0a 72%, #ffd60a 100%);
+}
+
+/* Warm light from the lower right, like the film-lit Squarespace hero */
+.site-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(55% 42% at 88% 108%, rgb(var(--yellow-rgb) / 0.17), transparent 72%),
+    radial-gradient(38% 28% at 6% -4%, rgb(255 159 10 / 0.09), transparent 72%);
+}
+
+/* Yellow gradient lettering for निकी (slow drift of the gradient) */
+.brand-gradient {
+  background-image: var(--brand-gradient);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: brand-drift 7s cubic-bezier(0.37, 0, 0.63, 1) infinite alternate;
+  filter: drop-shadow(0 0 22px rgb(var(--yellow-rgb) / 0.28));
+}
+@keyframes brand-drift {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+/* Oversized, light, tightly tracked headlines */
+main h1,
+main section h2 {
+  font-weight: 300;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+}
+.glass-card h2 { font-weight: 600; letter-spacing: -0.02em; }
+.display {
+  font-size: clamp(3.4rem, 11vw, 9.5rem);
+  line-height: 0.92 !important;
+  letter-spacing: -0.06em !important;
+  font-weight: 300 !important;
+}
+main section h2 { font-size: clamp(2.2rem, 5.6vw, 4.4rem); }
+main h3 { letter-spacing: -0.02em; }
+
+/* Small-caps category label */
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 1.1rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--yellow-400);
+}
+
+/* White primary buttons (not the round social icons, which carry aria-label) */
+a[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]),
+button[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]) {
+  background-image: none !important;
+  background-color: #fff !important;
+  color: #0a0a0a !important;
+  box-shadow: 0 10px 34px -10px rgb(255 255 255 / 0.35) !important;
+  letter-spacing: -0.01em;
+}
+@media (hover: hover) {
+  a[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]):hover,
+  button[class*="bg-gradient-to-r"][class*="rounded-full"]:not([aria-label]):hover {
+    background-color: var(--yellow-400) !important;
+    box-shadow: 0 14px 44px -10px rgb(var(--yellow-rgb) / 0.6) !important;
+  }
+}
+/* Outline CTA becomes a quiet white-ringed pill */
+a[class*="border-blue-400"][class*="rounded-full"] {
+  border: 1px solid rgb(255 255 255 / 0.45) !important;
+  color: #fff !important;
+  background: transparent !important;
+}
+@media (hover: hover) {
+  a[class*="border-blue-400"][class*="rounded-full"]:hover {
+    background: #fff !important;
+    color: #0a0a0a !important;
+  }
+}
+
+/* Big, dark, rounded cards with a hairline edge */
+.glass-card { border-radius: 1.75rem; }
+.card-lg { padding: clamp(1.75rem, 3vw, 2.75rem) !important; min-height: 17rem; }
+
+/* Yellow accents */
+::selection { background: rgb(var(--yellow-rgb) / 0.35); }
+:focus-visible { outline-color: var(--yellow-400); }
+.nav-progress { background: linear-gradient(90deg, var(--yellow-400), var(--amber-500)) !important; }
+.text-yellow-accent { color: var(--yellow-400); }
+
+/* Closing CTA: framed panel with a glowing radial behind it */
+.cta-stage { position: relative; isolation: isolate; }
+.cta-stage::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(120vw, 1100px);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(var(--yellow-rgb) / 0.34), rgb(255 159 10 / 0.12) 45%, transparent 72%);
+  filter: blur(12px);
+  animation: cta-breathe 9s cubic-bezier(0.37, 0, 0.63, 1) infinite alternate;
+}
+@keyframes cta-breathe {
+  from { scale: 0.92; opacity: 0.8; }
+  to { scale: 1.06; opacity: 1; }
+}
+.cta-frame {
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 2rem;
+  padding: clamp(2.5rem, 7vw, 6rem) clamp(1.25rem, 4vw, 4rem);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.015));
+  box-shadow: 0 40px 120px -40px rgb(0 0 0 / 0.8), inset 0 1px 0 rgb(255 255 255 / 0.12);
+}
+
+/* Springs are driven from JS (translate / transform set per frame) */
+[data-depth] { will-change: translate; }
+[data-tilt] { transform-style: preserve-3d; will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-gradient, .cta-stage::before { animation: none; }
+}
