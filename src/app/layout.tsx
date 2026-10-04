@@ -49,13 +49,16 @@ export default function RootLayout({
       {/* Flex column + min-h-dvh keeps the footer pinned to the true bottom even on short pages */}
       <body className={`${inter.className} flex min-h-dvh flex-col text-white antialiased`}>
         {/* Global interactive background (aurora + particle network) */}
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <InteractiveBackground />
 
         <GlassEffects />
         <RouteProgress />
         <ScrollReveal />
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

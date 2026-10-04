@@ -1,195 +1,147 @@
-'use client';
-
-import Link from 'next/link';
-import ScrollCue from '@/components/layout/ScrollCue';
+import Hero from '@/components/sections/Hero';
 import Stats from '@/components/sections/Stats';
-import { stats } from '@/lib/data/stats';
-import { missionCards } from '@/lib/data/mission';
-import { domains } from '@/lib/data/domains';
- 
+import TeamCard from '@/components/cards/TeamCard';
+import { teamStats } from '@/lib/data/stats';
+import { teamMembers } from '@/lib/data/team';
+import { domainTeams } from '@/lib/data/domains';
 
-export default function Home() {
-
+export default function TeamPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden pb-32 pt-28">
-        {/* Overlay and Hero Content */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70 pointer-events-none"></div>
-
-        {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <div data-aos="fade-up">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl">
-              Tech
-              <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                निकी
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-200 mb-4 font-semibold drop-shadow-lg">
-              Empowering Innovation Through Technology, Community, and Collaboration
-            </p>
-            <p className="text-lg text-gray-300 mb-10 max-w-3xl mx-auto drop-shadow-md">
-              Join our vibrant community of AI/ML enthusiasts, web developers, and AR/VR innovators.
-              Learn, collaborate, and build the future together.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link
-                href="/join"
-                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-2xl flex items-center gap-2"
-              >
-                <i className="fas fa-user-plus"></i>
-                Join Community
-              </Link>
-              <Link
-                href="/events"
-                className="glass-pill text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform flex items-center gap-2"
-              >
-                <i className="fas fa-calendar"></i>
-                Explore Events
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <ScrollCue />
-      </section>
+      <Hero
+        title="Meet Our "
+        titleGradient="Team"
+        subtitle="The Driving Force Behind Techniki"
+        description="            Meet the passionate individuals behind Techनिकी&apos;s success. Our diverse team of"
+        primaryButton={{
+          text: 'Join Our Team',
+          href: '/join',
+          icon: 'users',
+        }}
+        secondaryButton={{
+          text: 'View Projects',
+          href: '/projects',
+          icon: 'project-diagram',
+        }}
+      />
 
       {/* Stats Section */}
-      <Stats stats={stats} />
+      <Stats stats={teamStats} />
 
-      {/* About Section */}
-      <section id="about" className="py-20 bg-gray-900/50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              About Tech<span className="text-blue-400">निकी</span>
-            </h2>
-            <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              Techniki is more than just a community—it&apos;s a movement. We bring together
-              passionate students, developers, and innovators to learn, create, and shape the future
-              of technology.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            <div className="glass-card p-8 rounded-2xl" data-aos="fade-right">
-              <div className="text-blue-400 text-5xl mb-4">
-                <i className="fas fa-users"></i>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Our Community</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Join 500+ active members across various tech domains. Whether you&apos;re interested
-                in AI/ML, web development, AR/VR, or robotics, you&apos;ll find your tribe here.
-              </p>
-            </div>
-
-            <div className="glass-card p-8 rounded-2xl" data-aos="fade-left">
-              <div className="text-purple-400 text-5xl mb-4">
-                <i className="fas fa-rocket"></i>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Our Mission</h3>
-              <p className="text-gray-300 leading-relaxed">
-                To create an inclusive platform where technology enthusiasts can collaborate,
-                innovate, and transform ideas into impactful projects that solve real-world
-                problems.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission Cards */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">What We Do</h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              We organize events, workshops, and hackathons to help you learn, grow, and innovate.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {missionCards.map((card, index) => (
-              <div
-                key={card.id}
-                className="glass-card p-8 rounded-2xl text-center group hover:scale-105 transition-transform"
-                data-aos="fade-up"
-                data-aos-delay={index * 100}
-              >
-                <div
-                  className={`text-6xl mb-6 bg-gradient-to-r ${card.gradient} bg-clip-text text-transparent`}
-                >
-                  <i className={`fas fa-${card.icon}`}></i>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">
-                  {card.title}
-                </h3>
-                <p className="text-gray-300 leading-relaxed">{card.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tech Domains */}
+      {/* Team Members */}
       <section className="py-20 bg-gray-900/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Tech Domains</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Core Team
+            </h2>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              Explore diverse technology fields and find your area of interest
+              Meet the dedicated members who lead and shape Techniki&apos;s vision
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {domains.map((domain, index) => (
+          <div className="card-row max-w-7xl mx-auto">
+            {teamMembers.map((member, index) => (
+              <TeamCard key={index} member={member} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Domain Teams */}
+      <section className="py-20 bg-black/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Our Teams
+            </h2>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+              Specialized teams working on different tech domains
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {domainTeams.map((team, index) => (
               <div
-                key={domain.id}
-                className={`glass-card p-8 rounded-2xl text-center group hover:bg-gradient-to-br ${domain.gradient} transition-all cursor-pointer`}
+                key={team.id}
+                className={`glass-card p-8 rounded-2xl text-center group hover:bg-gradient-to-br ${team.gradient} transition-all cursor-pointer`}
                 data-aos="zoom-in"
                 data-aos-delay={index * 100}
               >
-                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
-                  <i className={`fas fa-${domain.icon} text-white`}></i>
+                <div className="text-5xl mb-4 text-white group-hover:scale-110 transition-transform">
+                  <i className={`fas fa-${team.icon}`}></i>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{domain.title}</h3>
-                <p className="text-gray-300 text-sm leading-relaxed">{domain.description}</p>
+                <h3 className="text-xl font-bold text-white mb-3">{team.name}</h3>
+                <p className="text-gray-300 text-sm mb-4">{team.description}</p>
+                <div className="text-gray-400 text-xs">
+                  <i className="fas fa-users mr-2"></i>
+                  {team.members}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-black/80">
-        <div className="container mx-auto px-4 text-center">
-          <div data-aos="zoom-in">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Join the Movement?
-            </h2>
-            <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Be part of a community that&apos;s shaping the future of technology. Learn,
-              collaborate, and innovate with us.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link
-                href="/join"
-                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-xl"
-              >
-                Join Now <i className="fas fa-user-plus ml-2"></i>
-              </Link>
-              <Link
-                href="/events"
-                className="bg-transparent border-2 border-blue-400 text-blue-400 px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-400 hover:text-white transition-all"
-              >
-                View Events <i className="fas fa-calendar ml-2"></i>
-              </Link>
+      {/* Join Team CTA */}
+      <section className="py-20 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center" data-aos="fade-up">
+            <div className="text-6xl mb-6">
+              <i className="fas fa-hand-holding-heart text-blue-400"></i>
             </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Want to Join Our Team?
+            </h2>
+            <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+              we&amp;apos;re always looking for passionate individuals who share our vision. 
+                              Whether you&apos;re a developer, designer, or simply passionate about technology,
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-10">
+              <div className="glass-card p-6 rounded-xl">
+                <div className="text-3xl mb-3 text-blue-400">
+                  <i className="fas fa-code"></i>
+                </div>
+                <h4 className="text-white font-bold mb-2">Developers</h4>
+                <p className="text-gray-300 text-sm">
+                  Build amazing projects and contribute to open source
+                </p>
+              </div>
+
+              <div className="glass-card p-6 rounded-xl">
+                <div className="text-3xl mb-3 text-purple-400">
+                  <i className="fas fa-paint-brush"></i>
+                </div>
+                <h4 className="text-white font-bold mb-2">Designers</h4>
+                <p className="text-gray-300 text-sm">
+                  Create stunning visuals and user experiences
+                </p>
+              </div>
+
+              <div className="glass-card p-6 rounded-xl">
+                <div className="text-3xl mb-3 text-green-400">
+                  <i className="fas fa-bullhorn"></i>
+                </div>
+                <h4 className="text-white font-bold mb-2">Community Managers</h4>
+                <p className="text-gray-300 text-sm">
+                  Organize events and grow our community
+                </p>
+              </div>
+            </div>
+
+            <a
+              href="/join-team"
+              className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-xl"
+            >
+              Apply Now <i className="fas fa-arrow-right ml-2"></i>
+            </a>
           </div>
         </div>
       </section>
     </>
   );
 }
+
+

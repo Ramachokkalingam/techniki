@@ -8,133 +8,95 @@ interface TeamCardProps {
   member: TeamMember;
 }
 
+const socials: {
+  key: keyof TeamMember['social'];
+  icon: string;
+  label: string;
+  gradient: string;
+}[] = [
+  { key: 'linkedin', icon: 'fab fa-linkedin-in', label: 'LinkedIn', gradient: 'from-blue-500 to-blue-700' },
+  { key: 'github', icon: 'fab fa-github', label: 'GitHub', gradient: 'from-gray-500 to-gray-700' },
+  { key: 'website', icon: 'fas fa-globe', label: 'Website', gradient: 'from-cyan-500 to-blue-600' },
+  { key: 'instagram', icon: 'fab fa-instagram', label: 'Instagram', gradient: 'from-pink-500 to-purple-600' },
+];
+
+/**
+ * Flip card.
+ *  - Desktop: flips on hover (pure CSS, no React re-render per hover).
+ *  - Touch / keyboard: tap, Enter or Space toggles the flip, so the bio and
+ *    social links are reachable on phones (the old version was hover-only).
+ *  - Every card is exactly the same size, whatever the bio length.
+ *  - The blur lives on the static outer shell; the 3D faces carry no
+ *    backdrop-filter (that combination is slow and glitchy).
+ */
 export default function TeamCard({ member }: TeamCardProps) {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [flipped, setFlipped] = useState(false);
+
+  const toggle = () => setFlipped((f) => !f);
+  const onKey = (e: React.KeyboardEvent) => {
+    if (e.target !== e.currentTarget) return; // ignore keys pressed on inner links
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggle();
+    } else if (e.key === 'Escape') {
+      setFlipped(false);
+    }
+  };
+
+  const links = socials.filter((s) => member.social[s.key]);
 
   return (
-    <div className="team-member-container">
+    <div
+      role="button"
+      tabIndex={0}
+      aria-pressed={flipped}
+      aria-label={`${member.name}, ${member.role}. Press to ${flipped ? 'hide' : 'show'} details`}
+      data-flipped={flipped}
+      onClick={toggle}
+      onKeyDown={onKey}
+      className="team-card glass-card group h-[26rem] w-full cursor-pointer rounded-3xl outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
+      style={{ perspective: '1100px' }}
+    >
       <div
-        className="card-style-3"
-        onMouseEnter={() => setIsFlipped(true)}
-        onMouseLeave={() => setIsFlipped(false)}
-        style={{ perspective: '1000px', height: '400px' }}
+        className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-data-[flipped=true]:[transform:rotateY(180deg)] [@media(hover:hover)]:group-hover:[transform:rotateY(180deg)]"
       >
-        <div
-          className="card-inner"
-          style={{
-            position: 'relative',
-            width: '100%',
-            height: '100%',
-            textAlign: 'center',
-            transition: 'transform 0.8s',
-            transformStyle: 'preserve-3d',
-            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-          }}
-        >
-          {/* Front of Card */}
-          <div
-            className="card-front"
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              backfaceVisibility: 'hidden',
-              borderRadius: '1rem',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: '2rem',
-              background:
-                'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
-            }}
-          >
+        {/* Front */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-3xl bg-gradient-to-br from-blue-500/10 to-purple-600/10 px-6 text-center [backface-visibility:hidden]">
+          <div className="relative mb-6 h-28 w-28 overflow-hidden rounded-full border-[3px] border-blue-400/40 shadow-[0_10px_30px_-10px_rgba(99,102,241,0.8)]">
             <Image
               src={member.image}
               alt={member.name}
-              width={100}
-              height={100}
-              className="profile-image mb-6"
-              style={{
-                objectFit: 'cover',
-                borderRadius: '50%',
-                border: '3px solid rgba(59, 130, 246, 0.3)',
-              }}
+              fill
+              sizes="112px"
+              className="object-cover"
             />
-            <h3 className="text-2xl font-bold mb-2 text-white">{member.name}</h3>
-            <p className="text-blue-400 font-semibold mb-3">{member.role}</p>
-            <p className="text-gray-400 text-sm">Hover to see more</p>
           </div>
+          <h3 className="mb-2 line-clamp-2 text-2xl font-bold text-white">{member.name}</h3>
+          <p className="mb-4 font-semibold text-blue-400">{member.role}</p>
+          <span className="glass-pill rounded-full px-4 py-1.5 text-xs text-gray-300">
+            <span className="hidden [@media(hover:hover)]:inline">Hover</span>
+            <span className="[@media(hover:hover)]:hidden">Tap</span> to see more
+          </span>
+        </div>
 
-          {/* Back of Card */}
-          <div
-            className="card-back"
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              backfaceVisibility: 'hidden',
-              borderRadius: '1rem',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: '2rem',
-              background:
-                'linear-gradient(135deg, rgba(147, 51, 234, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%)',
-              border: '1px solid rgba(147, 51, 234, 0.3)',
-              backdropFilter: 'blur(15px)',
-              transform: 'rotateY(180deg)',
-            }}
-          >
-            <h3 className="text-2xl font-bold mb-4 text-purple-400">About Me</h3>
-            <p className="text-gray-300 mb-6 leading-relaxed text-center text-sm">
-              {member.bio}
-            </p>
-            <div className="flex justify-center space-x-4">
-              {member.social.linkedin && (
-                <a
-                  href={member.social.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link bg-gradient-to-r from-blue-500 to-blue-600 p-3 rounded-full transition-all hover:scale-110"
-                >
-                  <i className="fab fa-linkedin text-white"></i>
-                </a>
-              )}
-              {member.social.github && (
-                <a
-                  href={member.social.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link bg-gradient-to-r from-gray-600 to-gray-700 p-3 rounded-full transition-all hover:scale-110"
-                >
-                  <i className="fab fa-github text-white"></i>
-                </a>
-              )}
-              {member.social.website && (
-                <a
-                  href={member.social.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link bg-gradient-to-r from-blue-500 to-blue-600 p-3 rounded-full transition-all hover:scale-110"
-                >
-                  <i className="fas fa-globe text-white"></i>
-                </a>
-              )}
-              {member.social.instagram && (
-                <a
-                  href={member.social.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link bg-gradient-to-r from-pink-500 to-pink-600 p-3 rounded-full transition-all hover:scale-110"
-                >
-                  <i className="fab fa-instagram text-white"></i>
-                </a>
-              )}
-            </div>
+        {/* Back */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-3xl bg-gradient-to-br from-purple-600/25 to-blue-500/20 px-7 text-center [backface-visibility:hidden] [transform:rotateY(180deg)]">
+          <h3 className="mb-3 text-2xl font-bold text-purple-300">About Me</h3>
+          <p className="mb-6 line-clamp-6 text-sm leading-relaxed text-gray-200">{member.bio}</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {links.map((s) => (
+              <a
+                key={s.key}
+                href={member.social[s.key]}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${member.name} on ${s.label}`}
+                onClick={(e) => e.stopPropagation()}
+                className={`flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br ${s.gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] outline-none transition-transform duration-300 hover:-translate-y-0.5 hover:scale-110 focus-visible:ring-2 focus-visible:ring-cyan-300/70 active:scale-95`}
+              >
+                <i className={s.icon}></i>
+              </a>
+            ))}
           </div>
         </div>
       </div>
