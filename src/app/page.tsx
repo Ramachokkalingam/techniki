@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import ScrollCue from '@/components/layout/ScrollCue';
 import Stats from '@/components/sections/Stats';
 import { stats } from '@/lib/data/stats';
 import { missionCards } from '@/lib/data/mission';
@@ -11,8 +12,8 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section with Hyperspeed Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden pb-32 pt-28">
         {/* Overlay and Hero Content */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70 pointer-events-none"></div>
 
@@ -50,11 +51,9 @@ export default function Home() {
               </Link>
             </div>
           </div>
-
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i className="fas fa-chevron-down text-white text-2xl opacity-50"></i>
-          </div>
         </div>
+
+        <ScrollCue />
       </section>
 
       {/* Stats Section */}

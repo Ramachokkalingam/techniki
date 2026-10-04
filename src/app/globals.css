@@ -1,14 +1,34 @@
 @import "tailwindcss";
 
 /* ==========================================================================
+   PART 1 - "Midnight Aurora" theme
+   --------------------------------------------------------------------------
+   Re-tints Tailwind's gray scale toward deep navy so every existing page
+   (bg-gray-900, text-gray-300 ...) picks up the new look with no markup edits.
+   ========================================================================== */
+@theme {
+  --default-transition-duration: 280ms;
+  --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  --color-gray-950: #04060f;
+  --color-gray-900: #0a0e1f;
+  --color-gray-800: #111833;
+  --color-gray-700: #1c2547;
+  --color-gray-600: #2c3862;
+  --color-gray-500: #7886ad;
+  --color-gray-400: #9aa6c7;
+  --color-gray-300: #c5cde3;
+  --color-gray-200: #dde2f0;
+}
+
+/* ==========================================================================
    Frosted-glass design system
    --------------------------------------------------------------------------
    Performance rules this file follows (don't undo them casually):
    1. backdrop-filter is the expensive part. Its cost grows with blur radius
       x area, and it re-runs every time what's *behind* it changes (our
-      background is an animated canvas). So: moderate radius, no nesting,
-      and no animating of blur/background/box-shadow. Only transform and
-      opacity are animated.
+      background is animated). So: moderate radius, no nesting, and no
+      animating of blur/background/box-shadow. Only transform and opacity
+      are animated.
    2. Depth comes from cheap static layers (gradients + inset shadows), not
       from extra blur.
    3. Everything degrades: no backdrop-filter support, reduced transparency,
@@ -16,10 +36,22 @@
    ========================================================================== */
 
 :root {
+  /* Theme tokens */
+  --bg-0: #060813;
+  --bg-1: #0a0e1f;
+  --accent-indigo: #6366f1;
+  --accent-cyan: #22d3ee;
+  --accent-violet: #a855f7;
+
   /* Fluid blur radius: r(vw) = clamp(12px, 8px + 0.5vw, 20px)
      -> 12px on phones, ~16px on laptops, 20px max on huge monitors. */
   --glass-blur: clamp(12px, 8px + 0.5vw, 20px);
-  --glass-saturate: 1.6;
+  --glass-saturate: 1.8;
+  /* Liquid-glass backdrop: blur + vivid colour + a touch of lift, like light
+     passing through thick glass. One shared token so every surface matches. */
+  --glass-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(1.07);
+  /* Navigation glass: clear, slightly more blur, vivid but not brightened */
+  --nav-filter: blur(22px) saturate(1.9);
 
   --glass-fill: linear-gradient(
     145deg,
@@ -30,19 +62,19 @@
   --glass-fill-dark: linear-gradient(
     145deg,
     rgba(255, 255, 255, 0.09) 0%,
-    rgba(10, 10, 25, 0.38) 55%,
-    rgba(10, 10, 25, 0.48) 100%
+    rgba(8, 12, 30, 0.4) 55%,
+    rgba(8, 12, 30, 0.5) 100%
   );
-  --glass-border: rgba(255, 255, 255, 0.13);
+  --glass-border: rgba(255, 255, 255, 0.09);
 
   /* Static "rim light": bright top edge, faint bottom edge, soft inner glow,
      then a soft drop shadow. Pure paint, no per-frame cost. */
   --glass-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.32),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
-    inset 0 0 22px rgba(255, 255, 255, 0.035),
-    0 18px 40px -14px rgba(0, 0, 0, 0.5),
-    0 2px 6px rgba(0, 0, 0, 0.18);
+    inset 0 1px 1px rgba(255, 255, 255, 0.45),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.08),
+    inset 0 0 28px rgba(255, 255, 255, 0.05),
+    0 22px 44px -16px rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.22);
 
   /* Spring easing: damped harmonic oscillator
        x(t) = 1 - e^(-zeta*w0*t) * ( cos(wd*t) + (zeta*w0/wd) * sin(wd*t) )
@@ -69,8 +101,8 @@
   .glass-card,
   .glass-panel,
   .glass-nav {
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: var(--glass-filter);
+    backdrop-filter: var(--glass-filter);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
   }
@@ -92,8 +124,8 @@
   .glass-nav {
     background: linear-gradient(
       180deg,
-      rgba(20, 20, 40, 0.62) 0%,
-      rgba(10, 10, 25, 0.5) 100%
+      rgba(14, 18, 40, 0.62) 0%,
+      rgba(8, 12, 30, 0.5) 100%
     );
     border-width: 0 0 1px 0;
     box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06);
@@ -118,7 +150,8 @@
      the card content (z-index:-1 inside the card's stacking context), and
      only its opacity is transitioned. */
   .glass-card::before,
-  .glass-panel::before {
+  .glass-panel::before,
+  .liquid-glass::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -137,21 +170,35 @@
 
   @media (hover: hover) and (pointer: fine) {
     .glass-card:hover::before,
-    .glass-panel:hover::before {
+    .glass-panel:hover::before,
+    .liquid-glass:hover::before {
       opacity: 1;
     }
   }
 
+  /* Hero / CTA buttons. Only compositor-friendly properties are transitioned
+     ("transition: all" also animated shadows and filters, which is what made
+     hover feel heavy). */
   .hero-btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 600;
-    transition: all 0.3s ease;
+    /* Tailwind v4 moves hover:-translate-y / active:scale onto the individual
+       `translate` and `scale` properties, so those must be listed here too. */
+    transition:
+      translate 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      scale 220ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 200ms ease-out;
   }
 
   /* Glass pill button (secondary buttons) */
   .glass-pill {
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    position: relative;
+    isolation: isolate;
+    -webkit-backdrop-filter: var(--glass-filter);
+    backdrop-filter: var(--glass-filter);
     background: var(--glass-fill);
     border: 1px solid rgba(255, 255, 255, 0.28);
     box-shadow:
@@ -160,6 +207,158 @@
     --tw-ease: var(--ease-spring);
     --default-transition-duration: 500ms;
   }
+
+
+  /* ======================================================================
+     PART 2 - Liquid glass
+     ----------------------------------------------------------------------
+     .glass-card / .glass-panel / .glass-pill / .liquid-glass share:
+       * a gradient "rim" ring (bright at the top-left and bottom-right
+         corners, clear in the middle) drawn as a masked 1px border, which is
+         what makes the edge look like bevelled glass
+       * the shared --glass-filter backdrop
+     The ring is static paint, so it costs nothing per frame.
+     ====================================================================== */
+  .glass-card::after,
+  .glass-panel::after,
+  .glass-pill::after,
+  .liquid-glass::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    padding: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.1) 28%,
+      rgba(255, 255, 255, 0) 52%,
+      rgba(255, 255, 255, 0.1) 74%,
+      rgba(255, 255, 255, 0.38) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+  }
+
+  /* Floating navigation surfaces (pill navbar + mobile dock) */
+  .liquid-glass {
+    position: relative;
+    isolation: isolate;
+    /* No brightness lift here: that is what made the bar look silver. */
+    -webkit-backdrop-filter: var(--nav-filter);
+    backdrop-filter: var(--nav-filter);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.012) 55%, rgba(255, 255, 255, 0.03) 100%),
+      rgba(6, 10, 28, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+      inset 0 0 24px rgba(110, 130, 255, 0.04),
+      0 18px 40px -16px rgba(0, 0, 0, 0.65),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  /* Softer rim than cards: only a thin highlight at the two corners */
+  .liquid-glass::after {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.32) 0%,
+      rgba(255, 255, 255, 0.04) 30%,
+      rgba(255, 255, 255, 0) 55%,
+      rgba(255, 255, 255, 0.04) 75%,
+      rgba(255, 255, 255, 0.18) 100%
+    );
+  }
+
+  /* The sliding highlight behind the active / hovered nav item.
+     Moves with `translate` + `width` on a spring; nothing else animates. */
+  .nav-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 9999px;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(180deg, rgba(150, 165, 255, 0.2), rgba(99, 102, 241, 0.07));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+      0 6px 18px -8px rgba(99, 102, 241, 0.8);
+    transition:
+      translate 520ms var(--ease-spring),
+      width 520ms var(--ease-spring),
+      opacity 220ms ease-out;
+    will-change: translate, width;
+  }
+  .nav-indicator[data-visible='true'] {
+    opacity: 1;
+  }
+
+  /* Mobile dock indicator: items are equal width, so it is pure CSS maths:
+     width = 100% / N, offset = index * 100% of its own width. */
+  .dock-indicator {
+    position: absolute;
+    top: 0.375rem; /* matches the dock's p-1.5 padding */
+    bottom: 0.375rem;
+    left: 0.375rem;
+    width: calc((100% - 0.75rem) / 5); /* 5 items */
+    border-radius: 1.5rem;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(180deg, rgba(150, 165, 255, 0.2), rgba(99, 102, 241, 0.07));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      0 6px 18px -8px rgba(99, 102, 241, 0.85);
+    transition:
+      translate 520ms var(--ease-spring),
+      opacity 220ms ease-out;
+  }
+  .dock-indicator[data-visible='true'] {
+    opacity: 1;
+  }
+
+  /* Scroll-progress hairline along the bottom of the navbar */
+  .nav-progress {
+    position: absolute;
+    left: 1.75rem;
+    right: 1.75rem;
+    bottom: 3px;
+    height: 2px;
+    border-radius: 2px;
+    pointer-events: none;
+    transform-origin: left center;
+    transform: scaleX(var(--p, 0));
+    background: linear-gradient(90deg, var(--accent-indigo), var(--accent-cyan));
+    opacity: 0.9;
+  }
+
+  /* ---- Card layout helpers ---------------------------------------------
+     .card-row   a wrapping row of identical-width cards. Every card in a row
+                 stretches to the tallest card (flex default), and an
+                 incomplete last row is centred instead of left-hugging.
+     --card-w    override per grid, e.g. .card-row--wide for featured cards. */
+  .card-row {
+    --card-w: 22rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .card-row > * {
+    flex: 0 1 var(--card-w);
+    min-width: min(100%, 18rem);
+  }
+  .card-row--wide {
+    --card-w: 36rem;
+  }
 }
 
 /* ---- Graceful fallbacks ------------------------------------------------ */
@@ -167,39 +366,185 @@
 /* Browser without backdrop-filter: make the fill more opaque so text stays
    readable instead of looking washed out. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .liquid-glass {
+    background: rgba(10, 14, 34, 0.9);
+  }
   .glass-card,
   .glass-panel,
   .glass-pill {
-    background: rgba(30, 30, 55, 0.88);
+    background: rgba(18, 24, 51, 0.9);
   }
   .glass-nav {
-    background: rgba(12, 12, 28, 0.94);
+    background: rgba(8, 12, 30, 0.94);
   }
 }
 
 /* OS-level "Reduce transparency": no blur at all, solid readable surfaces */
 @media (prefers-reduced-transparency: reduce) {
+  .liquid-glass,
   .glass-card,
   .glass-panel,
   .glass-nav,
   .glass-pill {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-    background: rgba(24, 24, 46, 0.95);
+    background: rgba(16, 22, 48, 0.96);
   }
 }
 
 /* "Reduce motion": drop the pointer light and spring animation */
 @media (prefers-reduced-motion: reduce) {
   .glass-card::before,
-  .glass-panel::before {
+  .glass-panel::before,
+  .liquid-glass::before {
     display: none;
+  }
+  .nav-indicator,
+  .dock-indicator {
+    transition: opacity 150ms linear;
   }
   .glass-card,
   .glass-panel,
   .glass-pill {
     --tw-ease: ease-out;
     --default-transition-duration: 150ms;
+  }
+}
+
+/* ==========================================================================
+   Background layers (see InteractiveBackground.tsx)
+   Only transform is animated; the gradients themselves are static.
+   ========================================================================== */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -10%, #11183a 0%, transparent 70%),
+    var(--bg-0);
+}
+
+.site-bg__aurora {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+.site-bg__aurora--a {
+  width: 70vmax;
+  height: 70vmax;
+  top: -28vmax;
+  left: -18vmax;
+  background: radial-gradient(closest-side, rgba(99, 102, 241, 0.42), rgba(99, 102, 241, 0));
+  animation: bg-drift-a 28s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+.site-bg__aurora--b {
+  width: 62vmax;
+  height: 62vmax;
+  bottom: -26vmax;
+  right: -16vmax;
+  background: radial-gradient(closest-side, rgba(34, 211, 238, 0.26), rgba(34, 211, 238, 0));
+  animation: bg-drift-b 36s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+.site-bg__aurora--c {
+  width: 48vmax;
+  height: 48vmax;
+  top: 28vh;
+  right: 4vw;
+  background: radial-gradient(closest-side, rgba(168, 85, 247, 0.28), rgba(168, 85, 247, 0));
+  animation: bg-drift-c 44s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+@keyframes bg-drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(9vw, 7vh, 0) scale(1.12); }
+}
+@keyframes bg-drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
+  50% { transform: translate3d(-8vw, -6vh, 0) scale(0.94); }
+}
+@keyframes bg-drift-c {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); }
+  50% { transform: translate3d(-6vw, 8vh, 0) scale(1.1); }
+}
+
+.site-bg__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 20%, transparent 75%);
+}
+
+.site-bg__canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.site-bg__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 40%, transparent 40%, rgba(3, 5, 12, 0.6) 100%),
+    linear-gradient(to bottom, rgba(3, 5, 12, 0.25), transparent 30%, rgba(3, 5, 12, 0.55));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-bg__aurora {
+    animation: none;
+  }
+}
+
+/* Some sections use an opaque "from-gray-900 to-black" gradient, which hides
+   the background completely. Make those translucent so the theme is continuous. */
+section[class*="from-gray-900"][class*="to-black"] {
+  background-image: linear-gradient(to bottom, rgba(10, 14, 31, 0.55), rgba(3, 5, 12, 0.78));
+}
+
+/* ==========================================================================
+   Page frame - fixes the background showing below the footer at max scroll
+   ========================================================================== */
+html {
+  background-color: var(--bg-0);
+  scroll-behavior: smooth;
+}
+
+/* Desktop only: stops the elastic overscroll that exposed the fixed background
+   under the footer. Left off on touch so pull-to-refresh keeps working. */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    overscroll-behavior-y: none;
+  }
+}
+
+body {
+  background-color: var(--bg-0);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Footer: solid-ish base under the glass, bottom border removed, and room for
+   the iPhone home-indicator area. */
+.site-footer {
+  position: relative;
+  background: linear-gradient(180deg, rgba(8, 11, 28, 0.78) 0%, rgba(4, 6, 16, 0.97) 100%);
+  border-width: 1px 0 0 0;
+  border-color: var(--glass-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Mobile: the floating dock sits over the bottom of the page, so give the
+   footer extra room instead of adding body padding (which would show the
+   background under the footer). */
+@media (max-width: 1023px) {
+  .site-footer {
+    padding-bottom: calc(6.5rem + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -240,28 +585,22 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #1f2937;
+  background: var(--bg-1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  background: linear-gradient(to bottom, var(--accent-indigo), var(--accent-cyan));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #2563eb, #7c3aed);
+  background: linear-gradient(to bottom, #4f46e5, #06b6d4);
 }
 
-/* Smooth Scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Base Styles */
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@supports (scrollbar-color: auto) {
+  html {
+    scrollbar-color: #4f5bd5 var(--bg-1);
+  }
 }
 
 /* Preserve 3D for flip cards */
@@ -273,7 +612,8 @@ body {
   backface-visibility: hidden;
 }
 
-/* Hyperspeed global styles */
+/* Hyperspeed (no longer mounted in the layout; kept so the file still works if
+   you ever bring it back). Scoped so it can't resize other canvases, e.g. QR codes. */
 #lights {
   width: 100%;
   height: 100%;
@@ -281,8 +621,118 @@ body {
   position: absolute;
 }
 
-canvas {
+#lights canvas {
   width: 100%;
   height: 100%;
 }
 
+/* ==========================================================================
+   PART 3
+   ========================================================================== */
+
+/* ---- Pill shapes site-wide ---------------------------------------------
+   Existing pages use rounded-lg on buttons and inputs. Unlayered CSS beats
+   Tailwind's layered utilities, so these rules re-shape them without editing
+   every page. Cards keep their rounded-2xl corners. */
+a[class*="rounded-lg"][class*="bg-gradient"],
+button[class*="rounded-lg"],
+a[class*="rounded-lg"][class*="bg-blue-"],
+a[class*="rounded-lg"][class*="bg-purple-"],
+a[class*="rounded-lg"][class*="bg-gray-"],
+select[class*="rounded-lg"],
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"])[class*="rounded-lg"] {
+  border-radius: 9999px;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"])[class*="rounded-lg"],
+select[class*="rounded-lg"] {
+  padding-inline: 1.35rem;
+}
+
+textarea[class*="rounded-lg"] {
+  border-radius: 1.5rem;
+  padding-inline: 1.35rem;
+}
+
+/* Gradient buttons get the same bevelled highlight as the glass surfaces. */
+a[class*="bg-gradient-to-r"][class*="rounded-full"],
+button[class*="bg-gradient-to-r"][class*="rounded-full"],
+a[class*="bg-gradient-to-r"][class*="rounded-lg"],
+button[class*="bg-gradient-to-r"][class*="rounded-lg"] {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+    0 10px 26px -10px rgba(99, 102, 241, 0.75);
+}
+
+/* ---- Smoothness ---------------------------------------------------------
+   1. `transition: all` also animates layout properties and filters, which
+      is what makes hovers feel heavy. Limit it to the cheap ones.
+   2. One shared easing: ease-out-quint  f(t) = 1 - (1 - t)^5
+      fast start, long soft landing; matches the 280 ms default duration. */
+.transition-all {
+  transition-property:
+    color, background-color, border-color, opacity, box-shadow, transform, translate, scale, rotate;
+}
+
+html {
+  /* Anchor jumps (#upcoming-events) must clear the floating navbar. */
+  scroll-padding-top: 6rem;
+}
+
+/* ---- Page enter animation (see src/app/template.tsx) -------------------
+   Transform only. Opacity < 1 would make the glass inside the page lose its
+   backdrop blur for the duration of the animation. */
+@keyframes page-enter {
+  from {
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+.page-enter {
+  animation: page-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+/* ---- Scroll reveal (see ScrollReveal.tsx) ------------------------------- */
+.rv {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--rv-delay, 0ms),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--rv-delay, 0ms);
+}
+.rv[data-aos="fade-right"] { transform: translate3d(-28px, 0, 0); }
+.rv[data-aos="fade-left"] { transform: translate3d(28px, 0, 0); }
+.rv[data-aos="zoom-in"] { transform: scale(0.94); }
+.rv.rv-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Route progress bar (see RouteProgress.tsx) ------------------------- */
+.route-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 3px;
+  pointer-events: none;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--accent-indigo), var(--accent-cyan), var(--accent-violet));
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.7);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
+  }
+  .rv {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
