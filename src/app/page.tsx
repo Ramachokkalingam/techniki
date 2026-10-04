@@ -59,6 +59,7 @@ export default function Home() {
       {/* Stats Section */}
       <Stats stats={stats} />
 
+
       {/* About Section */}
       <section id="about" className="py-20 bg-gray-900/50">
         <div className="container mx-auto px-4">
