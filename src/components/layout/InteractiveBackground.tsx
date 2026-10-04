@@ -54,7 +54,7 @@ export default function InteractiveBackground() {
     let w = 0;
     let h = 0;
     let dpr = 1;
-    let particles: Particle[] = [];
+    const particles: Particle[] = [];
     let raf = 0;
     let last = 0;
     let running = false;
