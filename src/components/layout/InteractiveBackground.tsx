@@ -30,9 +30,14 @@ type Particle = {
   r: number;
   depth: number; // 0.3 - 1, used for parallax
   fill: string;
+  glow: string;
 };
 
-const LINK_DIST = 140;
+type Ring = { x: number; y: number; t: number };
+
+const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+
+const LINK_DIST = 150;
 const POINTER_RADIUS = 190;
 const POINTER_PUSH = 520; // px/s^2 at the centre of the pointer field
 const SWIRL = 0.55; // sideways component of the pointer force (gives a "fluid" feel)
@@ -62,6 +67,13 @@ export default function InteractiveBackground() {
     const pointer = { x: 0, y: 0, sx: 0, sy: 0, active: false };
     let scrollTarget = window.scrollY;
     let scrollSmooth = scrollTarget;
+    let lastScrollY = scrollTarget;
+    let warp = 0; // smoothed scroll velocity, -1..1 (+ = scrolling down)
+    let prog = 0; // page progress 0..1, tints the whole field
+    const par = { x: 0, y: 0 }; // smoothed pointer position, -1..1, for aurora parallax
+    const rings: Ring[] = [];
+    const root = canvas.parentElement as HTMLElement | null;
+    let lastSy = -1;
 
     // Reused every frame (the old code allocated two Float32Arrays per frame).
     const px = new Float32Array(128);
@@ -76,9 +88,9 @@ export default function InteractiveBackground() {
     const buckets: number[][] = Array.from({ length: LEVELS }, () => []);
 
     const targetCount = () => {
-      const base = (w * h) / 16000;
+      const base = (w * h) / 13000;
       const scaled = coarse ? base * 0.6 : base;
-      return Math.round(Math.min(90, Math.max(26, scaled)));
+      return Math.round(Math.min(110, Math.max(30, scaled)));
     };
 
     const makeParticle = (x?: number, y?: number): Particle => {
@@ -95,9 +107,10 @@ export default function InteractiveBackground() {
         vy: bvy,
         bvx,
         bvy,
-        r: 0.9 + Math.random() * 1.6,
+        r: 1.1 + Math.random() * 1.9,
         depth: 0.3 + Math.random() * 0.7,
-        fill: `hsla(${hue.toFixed(0)}, 90%, 72%, 0.85)`,
+        fill: `hsla(${hue.toFixed(0)}, 95%, 75%, 0.95)`,
+        glow: `hsla(${hue.toFixed(0)}, 95%, 65%, 0.16)`,
       };
     };
 
@@ -138,11 +151,35 @@ export default function InteractiveBackground() {
       pointer.sy += (pointer.y - pointer.sy) * follow;
       scrollSmooth += (scrollTarget - scrollSmooth) * (1 - Math.exp(-dt * 8));
 
+      // Scroll velocity -> "warp" (exponentially smoothed, so it eases in and out)
+      const vel = (scrollTarget - lastScrollY) / Math.max(dt, 0.001);
+      lastScrollY = scrollTarget;
+      warp += (clamp(vel / 1800, -1, 1) - warp) * (1 - Math.exp(-dt * 6));
+
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      prog = maxScroll > 0 ? clamp(scrollSmooth / maxScroll, 0, 1) : 0;
+
+      // Share scroll + pointer with the CSS aurora layers (only when they changed)
+      par.x += ((pointer.active ? (pointer.x / w) * 2 - 1 : 0) - par.x) * (1 - Math.exp(-dt * 3));
+      par.y += ((pointer.active ? (pointer.y / h) * 2 - 1 : 0) - par.y) * (1 - Math.exp(-dt * 3));
+      if (root && (Math.abs(scrollSmooth - lastSy) > 0.5 || Math.abs(par.x) > 0.001 || Math.abs(par.y) > 0.001)) {
+        lastSy = scrollSmooth;
+        root.style.setProperty('--sy', scrollSmooth.toFixed(1));
+        root.style.setProperty('--px', par.x.toFixed(3));
+        root.style.setProperty('--py', par.y.toFixed(3));
+      }
+
+      for (let i = rings.length - 1; i >= 0; i--) {
+        rings[i].t += dt / 0.9;
+        if (rings[i].t >= 1) rings.splice(i, 1);
+      }
+
       const margin = 20;
       for (const p of particles) {
         // Ease velocity back toward the ambient drift.
         p.vx += (p.bvx - p.vx) * relax;
         p.vy += (p.bvy - p.vy) * relax;
+        p.vy -= warp * 700 * p.depth * dt; // scrolling pulls the field along
 
         if (pointer.active) {
           const dx = p.x - pointer.sx;
@@ -182,11 +219,12 @@ export default function InteractiveBackground() {
 
       // Soft glow under the pointer.
       if (pointer.active) {
-        const g = ctx.createRadialGradient(pointer.sx, pointer.sy, 0, pointer.sx, pointer.sy, 240);
-        g.addColorStop(0, 'rgba(34, 211, 238, 0.10)');
-        g.addColorStop(1, 'rgba(34, 211, 238, 0)');
+        const hue = 190 + prog * 80; // cyan at the top of the page -> violet at the bottom
+        const g = ctx.createRadialGradient(pointer.sx, pointer.sy, 0, pointer.sx, pointer.sy, 280);
+        g.addColorStop(0, `hsla(${hue.toFixed(0)}, 95%, 65%, 0.2)`);
+        g.addColorStop(1, `hsla(${hue.toFixed(0)}, 95%, 65%, 0)`);
         ctx.fillStyle = g;
-        ctx.fillRect(pointer.sx - 240, pointer.sy - 240, 480, 480);
+        ctx.fillRect(pointer.sx - 280, pointer.sy - 280, 560, 560);
       }
 
       // Particle-to-particle links, bucketed by opacity.
@@ -208,7 +246,7 @@ export default function InteractiveBackground() {
       for (let lv = 0; lv < LEVELS; lv++) {
         const b = buckets[lv];
         if (!b.length) continue;
-        ctx.strokeStyle = `rgba(140, 170, 255, ${(0.05 + (lv / (LEVELS - 1)) * 0.23).toFixed(3)})`;
+        ctx.strokeStyle = `hsla(${(215 + prog * 60).toFixed(0)}, 95%, 75%, ${(0.09 + (lv / (LEVELS - 1)) * 0.34).toFixed(3)})`;
         ctx.beginPath();
         for (let i = 0; i < b.length; i += 4) {
           ctx.moveTo(b[i], b[i + 1]);
@@ -226,7 +264,7 @@ export default function InteractiveBackground() {
           const d = Math.hypot(dx, dy);
           if (d < POINTER_RADIUS) {
             const t = 1 - d / POINTER_RADIUS;
-            ctx.strokeStyle = `rgba(34, 211, 238, ${(t * t * 0.55).toFixed(3)})`;
+            ctx.strokeStyle = `hsla(${(190 + prog * 80).toFixed(0)}, 95%, 70%, ${(t * t * 0.7).toFixed(3)})`;
             ctx.beginPath();
             ctx.moveTo(pointer.sx, pointer.sy);
             ctx.lineTo(px[i], py[i]);
@@ -235,13 +273,39 @@ export default function InteractiveBackground() {
         }
       }
 
-      // Dots on top.
+      // Click shock-wave rings
+      for (const r of rings) {
+        const e = 1 - Math.pow(1 - r.t, 3); // ease-out cubic
+        ctx.strokeStyle = `rgba(150, 190, 255, ${((1 - r.t) * 0.55).toFixed(3)})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, e * 240, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      // Soft halo behind each dot, then the dot itself
       for (let i = 0; i < n; i++) {
         const p = particles[i];
+        ctx.fillStyle = p.glow;
+        ctx.beginPath();
+        ctx.arc(px[i], py[i], p.r * 4, 0, Math.PI * 2);
+        ctx.fill();
         ctx.fillStyle = p.fill;
         ctx.beginPath();
         ctx.arc(px[i], py[i], p.r, 0, Math.PI * 2);
         ctx.fill();
+      }
+
+      // Scroll "warp": short streaks behind the dots while you scroll fast
+      if (Math.abs(warp) > 0.04) {
+        ctx.lineWidth = 1.3;
+        ctx.strokeStyle = `rgba(180, 205, 255, ${(Math.min(1, Math.abs(warp)) * 0.45).toFixed(3)})`;
+        ctx.beginPath();
+        for (let i = 0; i < n; i++) {
+          ctx.moveTo(px[i], py[i]);
+          ctx.lineTo(px[i], py[i] + warp * 70 * particles[i].depth);
+        }
+        ctx.stroke();
       }
     };
 
@@ -294,6 +358,8 @@ export default function InteractiveBackground() {
 
     // A click sends a radial shock-wave through nearby particles.
     const onPointerDown = (e: PointerEvent) => {
+      rings.push({ x: e.clientX, y: e.clientY, t: 0 });
+      if (rings.length > 6) rings.shift();
       for (const p of particles) {
         const dx = p.x - e.clientX;
         const dy = p.y - (e.clientY + scrollSmooth * p.depth * 0.12);

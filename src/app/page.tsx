@@ -15,7 +15,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden pb-32 pt-28">
         {/* Overlay and Hero Content */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/35 pointer-events-none"></div>
 
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4 text-center">
@@ -58,7 +58,6 @@ export default function Home() {
 
       {/* Stats Section */}
       <Stats stats={stats} />
-
 
       {/* About Section */}
       <section id="about" className="py-20 bg-gray-900/50">
