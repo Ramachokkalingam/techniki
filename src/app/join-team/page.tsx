@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function JoinTeamPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900 pt-24 pb-16">
+    <div className="min-h-dvh bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900 pt-24 pb-16">
       <div className="container mx-auto px-4">
         {/* Hero Section */}
         <div className="text-center mb-16">

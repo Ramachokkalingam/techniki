@@ -4,7 +4,7 @@ export default function EthicalHackingRegistration() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-dvh flex items-center justify-center overflow-hidden">
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80 pointer-events-none"></div>
 

@@ -149,7 +149,7 @@ export default function Navbar() {
       {/* ===================== Top pill (all sizes) ===================== */}
       <header
         ref={headerRef}
-        className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3 sm:px-4 sm:pt-4"
+        className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:pl-[max(1rem,env(safe-area-inset-left))] sm:pr-[max(1rem,env(safe-area-inset-right))] sm:pt-[max(1rem,env(safe-area-inset-top))]"
       >
         <nav
           aria-label="Primary"
@@ -226,7 +226,7 @@ export default function Navbar() {
       </header>
 
       {/* ===================== Bottom dock (below lg) ===================== */}
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-4 pb-[max(1rem,env(safe-area-inset-bottom))] lg:hidden">
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] pb-[max(1rem,env(safe-area-inset-bottom))] lg:hidden">
         <nav
           aria-label="Primary mobile"
           className="liquid-glass pointer-events-auto relative grid w-full max-w-md grid-cols-5 rounded-[2rem] p-1.5"

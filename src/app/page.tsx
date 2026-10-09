@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden pb-32 pt-28">
+      <section className="relative flex min-h-dvh items-center justify-center overflow-hidden pb-32 pt-28">
         {/* Overlay and Hero Content */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/35 pointer-events-none"></div>
 

@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function CtrlThinkPage() {
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-dvh bg-gray-900">
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center pt-20 bg-gradient-to-br from-blue-900/40 to-purple-900/40">
         <div className="absolute inset-0 bg-black/50"></div>

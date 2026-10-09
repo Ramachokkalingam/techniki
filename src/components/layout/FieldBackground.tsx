@@ -17,7 +17,10 @@ import { useEffect, useRef } from "react";
 
 type Ripple = { x: number; y: number; t: number };
 
-const SPACING = 30;          // distance between needles (px)
+const SPACING = 30;          // distance between needles on laptops / desktops (px)
+const SPACING_COMPACT = 40;  // phones and tablets: ~45% fewer needles to animate
+const FRAME_MS = 1000 / 61;  // desktop frame cap (keeps 120/144 Hz screens from burning power)
+const FRAME_MS_COMPACT = 1000 / 31; // phones: 30 fps is plenty for slow drifting needles
 const REACH = 300;           // how far the magnet influences needles (px)
 const RIPPLE_LIFE = 2200;    // ms
 const RIPPLE_SPEED = 0.55;   // px per ms
@@ -40,18 +43,27 @@ export default function FieldBackground() {
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // Phones / tablets (touch or narrow screens) get a lighter version of the effect.
+    let compact = false;
+    let spacing = SPACING;
     let w = 0, h = 0, cols = 0, rows = 0, raf = 0;
+    let lastDraw = 0;
     let angles = new Float32Array(0);
     const ripples: Ripple[] = [];
     const ptr = { x: 0, y: 0, active: false, last: 0 };
     const magnet = { x: 0, y: 0 };
 
-    const draw = (now: number) => {
+    const draw = (now: number, dt = 16.7) => {
+      // Frame-rate independent easing: same feel at 30, 60 or 144 fps.
+      const frames = Math.min(dt, 100) / 16.667;
+      const magnetEase = 1 - Math.pow(0.91, frames);
+      const needleEase = 1 - Math.pow(0.84, frames);
+
       const idle = !ptr.active || now - ptr.last > IDLE_AFTER;
       const tx = idle ? w * (0.5 + 0.32 * Math.sin(now * 0.00023)) : ptr.x;
       const ty = idle ? h * (0.5 + 0.28 * Math.sin(now * 0.00031 + 1.3)) : ptr.y;
-      magnet.x += (tx - magnet.x) * 0.09;
-      magnet.y += (ty - magnet.y) * 0.09;
+      magnet.x += (tx - magnet.x) * magnetEase;
+      magnet.y += (ty - magnet.y) * magnetEase;
 
       // dipole axis rotates slowly
       const axis = now * 0.0004;
@@ -78,8 +90,8 @@ export default function FieldBackground() {
 
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
-          const cx = c * SPACING + (r & 1 ? SPACING / 2 : 0) - SPACING / 2;
-          const cy = r * SPACING - SPACING / 2;
+          const cx = c * spacing + (r & 1 ? spacing / 2 : 0) - spacing / 2;
+          const cy = r * spacing - spacing / 2;
           const i = r * cols + c;
 
           const dx = cx - magnet.x, dy = cy - magnet.y;
@@ -115,7 +127,7 @@ export default function FieldBackground() {
           // ease toward target along the shortest turn (needle period is pi)
           let diff = target - angles[i];
           diff = ((((diff + Math.PI / 2) % Math.PI) + Math.PI) % Math.PI) - Math.PI / 2;
-          angles[i] += diff * (reduceMotion ? 1 : 0.16);
+          angles[i] += diff * (reduceMotion ? 1 : needleEase);
 
           const e = Math.min(1, inf * 1.1 + wave);
           const a = angles[i];
@@ -151,7 +163,10 @@ export default function FieldBackground() {
       // Mobile URL-bar show/hide only changes the height a little: ignore it.
       if (w && Math.abs(nextW - w) < 1 && Math.abs(nextH - h) < 120) return;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      compact =
+        nextW < 768 || window.matchMedia("(hover: none), (pointer: coarse)").matches;
+      spacing = compact ? SPACING_COMPACT : SPACING;
+      const dpr = Math.min(window.devicePixelRatio || 1, compact ? 1.25 : 1.5);
       w = nextW;
       h = nextH;
       canvas.width = Math.round(w * dpr);
@@ -159,16 +174,31 @@ export default function FieldBackground() {
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      cols = Math.ceil(w / SPACING) + 2;
-      rows = Math.ceil(h / SPACING) + 2;
+      cols = Math.ceil(w / spacing) + 2;
+      rows = Math.ceil(h / spacing) + 2;
       angles = new Float32Array(cols * rows);
       if (!magnet.x) { magnet.x = w * 0.6; magnet.y = h * 0.4; }
       if (reduceMotion) draw(0);
     };
 
     const loop = (now: number) => {
-      draw(now);
       raf = requestAnimationFrame(loop);
+      const dt = now - lastDraw;
+      // Skip frames above the cap. The 1 ms slack stops a 60 Hz screen from
+      // dropping every other frame because of timer jitter.
+      if (dt < (compact ? FRAME_MS_COMPACT : FRAME_MS) - 1) return;
+      lastDraw = now;
+      draw(now, dt);
+    };
+
+    // Stop drawing completely while the tab is in the background.
+    const onVisibility = () => {
+      cancelAnimationFrame(raf);
+      raf = 0;
+      if (!document.hidden && !reduceMotion) {
+        lastDraw = performance.now();
+        raf = requestAnimationFrame(loop);
+      }
     };
 
     const onMove = (e: PointerEvent) => {
@@ -193,6 +223,8 @@ export default function FieldBackground() {
       window.addEventListener("pointermove", onMove, { passive: true });
       window.addEventListener("pointerdown", onDown, { passive: true });
       document.addEventListener("mouseout", onLeave);
+      document.addEventListener("visibilitychange", onVisibility);
+      lastDraw = performance.now();
       raf = requestAnimationFrame(loop);
     }
 
@@ -202,6 +234,7 @@ export default function FieldBackground() {
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerdown", onDown);
       document.removeEventListener("mouseout", onLeave);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 

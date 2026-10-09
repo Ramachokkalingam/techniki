@@ -27,7 +27,7 @@ export default function ComputerVisionPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-dvh bg-gray-900">
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center pt-20 bg-center bg-cover" style={{ backgroundImage: "url('/assets/images/events/image.png')" }}>
         <div className="absolute inset-0 bg-black/60"></div>

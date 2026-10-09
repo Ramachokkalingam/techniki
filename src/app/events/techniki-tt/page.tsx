@@ -45,7 +45,7 @@ export default function ComputerVisionWorkshopPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-900 via-cyan-900 to-gray-900 text-white">
+    <main className="min-h-dvh bg-gradient-to-br from-gray-900 via-cyan-900 to-gray-900 text-white">
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center pt-20 bg-gradient-to-br from-cyan-900/40 to-blue-900/40">
         <div className="absolute inset-0 bg-black/50"></div>

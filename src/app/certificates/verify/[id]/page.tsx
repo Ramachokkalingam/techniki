@@ -19,7 +19,7 @@ export default async function CertificateVerifyPage({ params }: PageProps) {
   const certificate = result.certificate;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black py-20 px-4">
+    <div className="min-h-dvh bg-gradient-to-br from-gray-900 via-purple-900 to-black py-20 px-4">
       <div className="container mx-auto max-w-4xl">
         {/* Success Header */}
         <div className="text-center mb-12">

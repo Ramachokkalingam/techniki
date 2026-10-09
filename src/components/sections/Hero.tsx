@@ -27,11 +27,11 @@ export default function Hero({
   secondaryButton,
 }: HeroProps) {
   return (
-    <section className="relative flex min-h-screen items-center justify-center pb-32 pt-28">
+    <section className="relative flex min-h-dvh items-center justify-center pb-32 pt-28">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20"></div>
       <div className="container relative z-10 mx-auto px-6 text-center">
         <div data-aos="fade-up" data-aos-duration="1000">
-          <h1 className="mb-6 text-6xl font-bold leading-tight text-white md:text-8xl">
+          <h1 className="mb-6 text-5xl font-bold leading-tight text-white [overflow-wrap:anywhere] sm:text-6xl md:text-8xl">
             {titleGradient ? (
               <>
                 {title.split(titleGradient)[0]}

@@ -37,6 +37,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  // Lets the page draw edge to edge on notched phones. Without this, every
+  // env(safe-area-inset-*) in the CSS (footer, bottom dock) silently resolves to 0.
+  viewportFit: 'cover',
   themeColor: '#060813',
   colorScheme: 'dark',
 };

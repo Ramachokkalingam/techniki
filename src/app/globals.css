@@ -1027,3 +1027,158 @@ a[class*="border-blue-400"][class*="rounded-full"] {
     inset 0 2px 6px rgb(0 0 0 / 0.25),
     0 0 0 1.5px rgb(var(--yellow-rgb) / 0.9);
 }
+
+/* ==========================================================================
+   PART 6 - phones, tablets and touch screens
+   --------------------------------------------------------------------------
+   Everything below only changes behaviour on small or touch devices (or when
+   the user asks for less motion). Laptop and desktop rendering is untouched.
+   ========================================================================== */
+
+/* ---- Touch behaviour (all devices) ------------------------------------- */
+html {
+  /* Stop iOS from re-scaling text when the phone is rotated. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Taps already get a visible pressed state, so drop the grey flash. */
+  -webkit-tap-highlight-color: transparent;
+}
+/* Removes the double-tap-to-zoom delay on controls. Pinch zoom still works. */
+:where(a, button, summary, [role='button'], label, select, input, textarea) {
+  touch-action: manipulation;
+}
+/* Long headings, emails and URLs must wrap instead of pushing the page wider. */
+main :where(h1, h2, h3, p, li, a) {
+  overflow-wrap: break-word;
+}
+/* Glows that are wider than the screen (CTA halo, aurora) must never create a
+   sideways scrollbar on phones. `clip` (unlike `hidden`) keeps sticky/fixed intact. */
+body {
+  overflow-x: clip;
+}
+@supports not (overflow: clip) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* ---- Cheaper glass + lighter effects on phones and touch screens -------
+   The biggest phone cost is backdrop-filter on every card while the
+   background behind it animates. Drop the extra colour passes (saturate /
+   brightness) and shrink the nav blur; the look stays frosted. */
+@media (max-width: 767px), (hover: none) {
+  :root {
+    --glass-filter: blur(var(--glass-blur)) saturate(1.35);
+    --nav-filter: blur(14px) saturate(1.5);
+  }
+
+  /* The pointer-follow highlight can never be seen without a mouse. */
+  .glass-card::before,
+  .glass-panel::before,
+  .liquid-glass::before {
+    display: none;
+  }
+
+  /* Animated gold-foil lettering repaints text every frame (plus an SVG noise
+     texture and a drop-shadow filter). Keep the gradient, freeze it. */
+  .brand-gradient {
+    animation: none;
+    background-image: var(--brand-gradient);
+    background-size: 100% 100%;
+    background-blend-mode: normal;
+    filter: none;
+  }
+
+  /* Two big blurred halos are enough: stop animating the other layers. */
+  .site-bg__aurora--b,
+  .site-bg__aurora--c {
+    animation: none;
+    will-change: auto;
+  }
+  .cta-stage::before {
+    filter: none;
+    animation: none;
+  }
+
+  /* Scroll-reveal without the blur step (blur is costly on phone GPUs). */
+  .rv.rv-title {
+    filter: none;
+    transform: translate3d(0, 28px, 0);
+  }
+  .intro {
+    animation-name: intro-rise-lite;
+    animation-duration: 700ms;
+  }
+  .intro-move {
+    animation-duration: 700ms;
+  }
+  .rv {
+    transition-duration: 600ms, 700ms, 0ms;
+  }
+}
+@keyframes intro-rise-lite {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Small screens: spacing and sizes ---------------------------------- */
+@media (max-width: 639px) {
+  /* Cards no longer need to be tall just to look "big" on a narrow screen. */
+  .card-lg {
+    min-height: 0;
+  }
+  .card-row {
+    gap: 1.25rem;
+  }
+  /* Slightly smaller halo so it fits inside the viewport. */
+  .cta-stage::before {
+    width: 140vw;
+  }
+  .cta-frame {
+    border-radius: 1.5rem;
+  }
+  .glass-card {
+    border-radius: 1.5rem;
+  }
+  /* Comfortable minimum tap size for round icon buttons and pills. */
+  :where(a, button)[class*='rounded-full']:not([class*='w-']):not([class*='h-']) {
+    min-height: 2.75rem;
+  }
+  html {
+    scroll-padding-top: 5rem;
+  }
+}
+
+/* Very narrow phones (320px class) */
+@media (max-width: 359px) {
+  .display {
+    font-size: clamp(2.75rem, 15vw, 3.4rem);
+  }
+  main section h2 {
+    font-size: clamp(1.9rem, 9vw, 2.2rem);
+  }
+}
+
+/* ---- Short landscape screens (phones turned sideways) ------------------- */
+@media (max-height: 520px) and (orientation: landscape) {
+  /* A full-screen hero would be taller than the screen and hide its content. */
+  section.min-h-dvh {
+    min-height: auto;
+  }
+}
+
+/* ---- Reduced motion: no smooth-scrolling either ------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rv.rv-title {
+    filter: none;
+  }
+}
