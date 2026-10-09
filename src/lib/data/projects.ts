@@ -160,7 +160,7 @@ export const projects: Project[] = [
   },
   {
     id: 'techniki-website',
-    title: 'Techनिकी Website',
+    title: 'Techniki Website',
     category: 'web',
     description:
       'Modern, responsive community website showcasing events, projects, and fostering collaboration among tech enthusiasts.',

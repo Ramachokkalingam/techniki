@@ -4,14 +4,14 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="contact" className="bg-black/80 backdrop-blur-lg text-white py-12 border-t border-white/10">
+    <footer id="contact" className="site-footer glass-nav pt-12 text-white">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mb-10">
           {/* Brand Section */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-3 group">
               <span className="text-xl font-bold group-hover:text-blue-400 transition-colors">
-                Tech<span className="text-blue-400">निकी</span>
+                Tech<span className="brand-gradient">niki</span>
               </span>
             </Link>
             <p className="text-gray-300 leading-relaxed text-sm md:text-base">
@@ -139,7 +139,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-700 pt-6 text-center">
           <p className="text-gray-400 text-sm">
-            &copy; {currentYear} Techनिकी. All rights reserved. Built with ❤️
+            &copy; {currentYear} Techniki. All rights reserved. Built with ❤️
             by the Techniki Team.
           </p>
         </div>

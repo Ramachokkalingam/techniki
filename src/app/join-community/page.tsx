@@ -1,13 +1,13 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Join Community - Techनिकी',
-  description: 'Join the Techनिकी community and connect with passionate tech enthusiasts',
+  title: 'Join Community - Techniki',
+  description: 'Join the Techniki community and connect with passionate tech enthusiasts',
 };
 
 export default function JoinCommunityPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 pt-24 pb-16">
+    <div className="min-h-dvh bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 pt-24 pb-16">
       <div className="container mx-auto px-4">
         {/* Hero Section */}
         <div className="text-center mb-16">
@@ -26,7 +26,7 @@ export default function JoinCommunityPage() {
             href="https://discord.gg/jxt2fZG4jM"
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-black/40 backdrop-blur-lg rounded-2xl p-8 border border-purple-500/20 hover:border-purple-500/50 transition-all hover:scale-105"
+            className="group glass-panel rounded-2xl p-8 border border-purple-500/20 hover:border-purple-500/50 transition-all hover:scale-105"
           >
             <div className="w-16 h-16 rounded-full bg-gradient-to-r from-indigo-500 to-purple-700 flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
               <i className="fab fa-discord text-white text-3xl"></i>
@@ -40,7 +40,7 @@ export default function JoinCommunityPage() {
             href="https://chat.whatsapp.com/BVCtubt4o6pLJcfPAYdBO5"
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-black/40 backdrop-blur-lg rounded-2xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all hover:scale-105"
+            className="group glass-panel rounded-2xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all hover:scale-105"
           >
             <div className="w-16 h-16 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
               <i className="fab fa-whatsapp text-white text-3xl"></i>
@@ -54,7 +54,7 @@ export default function JoinCommunityPage() {
             href="https://www.instagram.com/techniki_auh/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-black/40 backdrop-blur-lg rounded-2xl p-8 border border-pink-500/20 hover:border-pink-500/50 transition-all hover:scale-105"
+            className="group glass-panel rounded-2xl p-8 border border-pink-500/20 hover:border-pink-500/50 transition-all hover:scale-105"
           >
             <div className="w-16 h-16 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
               <i className="fab fa-instagram text-white text-3xl"></i>
@@ -68,7 +68,7 @@ export default function JoinCommunityPage() {
             href="https://www.linkedin.com/company/technikiauh"
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-black/40 backdrop-blur-lg rounded-2xl p-8 border border-blue-500/20 hover:border-blue-500/50 transition-all hover:scale-105"
+            className="group glass-panel rounded-2xl p-8 border border-blue-500/20 hover:border-blue-500/50 transition-all hover:scale-105"
           >
             <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
               <i className="fab fa-linkedin-in text-white text-3xl"></i>
@@ -79,7 +79,7 @@ export default function JoinCommunityPage() {
         </div>
 
         {/* Benefits Section */}
-        <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
+        <div className="glass-panel rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
             Why Join Our Community?
           </h2>

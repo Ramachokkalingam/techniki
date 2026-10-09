@@ -21,6 +21,15 @@ const colorMap: Record<string, string> = {
   cyan: 'text-cyan-400',
 };
 
+// Full class names so Tailwind can see them (`lg:grid-cols-${n}` is never generated).
+const lgCols: Record<number, string> = {
+  2: 'lg:grid-cols-2',
+  3: 'lg:grid-cols-3',
+  4: 'lg:grid-cols-4',
+  5: 'lg:grid-cols-5',
+  6: 'lg:grid-cols-6',
+};
+
 export default function Stats({ stats, background = 'bg-black/50' }: StatsProps) {
   return (
     <section className={`py-20 ${background}`}>
@@ -30,12 +39,12 @@ export default function Stats({ stats, background = 'bg-black/50' }: StatsProps)
       ` }} />
       <div className="container mx-auto px-6">
         <div
-          className={`grid grid-cols-2 lg:grid-cols-${stats.length} gap-8`}
+          className={`grid grid-cols-2 gap-6 md:gap-8 ${lgCols[stats.length] ?? 'lg:grid-cols-4'}`}
           data-aos="fade-up"
         >
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="glass-card p-6 rounded-2xl">
+              <div className="glass-card flex h-full flex-col justify-center rounded-2xl p-6">
                 <div
                   className={`text-4xl font-bold ${colorMap[stat.color] || 'text-blue-400'} mb-2 scale-bounce`}
                   style={{ animationDelay: `${index * 60}ms` }}

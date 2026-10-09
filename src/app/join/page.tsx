@@ -6,7 +6,7 @@ export default function JoinPage() {
       {/* Hero Section */}
       <Hero
         title="Join "
-        titleGradient="Techनिकी"
+        titleGradient="Techniki"
         subtitle="Become Part of the Movement"
         description="Join our vibrant community of tech enthusiasts, innovators, and learners. Start your journey with us today!"
         primaryButton={{

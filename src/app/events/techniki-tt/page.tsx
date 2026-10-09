@@ -45,7 +45,7 @@ export default function ComputerVisionWorkshopPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-900 via-cyan-900 to-gray-900 text-white">
+    <main className="min-h-dvh bg-gradient-to-br from-gray-900 via-cyan-900 to-gray-900 text-white">
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center pt-20 bg-gradient-to-br from-cyan-900/40 to-blue-900/40">
         <div className="absolute inset-0 bg-black/50"></div>
@@ -62,19 +62,19 @@ export default function ComputerVisionWorkshopPage() {
                 LEARN. CODE. INNOVATE.
               </p>
               <p className="text-lg text-gray-400 mb-6">
-                Organized by Techनिकी @ Amity University Gurugram &nbsp;|&nbsp; Co-powered by AI Research Cluster
+                Organized by Techniki @ Amity University Gurugram &nbsp;|&nbsp; Co-powered by AI Research Cluster
               </p>
               {/* Event Details Pills */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <div className="glass-card px-6 py-3 rounded-full bg-white/10 backdrop-blur">
+                <div className="glass-card px-6 py-3 rounded-full">
                   <i className="fas fa-calendar mr-2 text-cyan-400"></i>
                   <span className="text-white font-semibold">April 7, 2026</span>
                 </div>
-                <div className="glass-card px-6 py-3 rounded-full bg-white/10 backdrop-blur">
+                <div className="glass-card px-6 py-3 rounded-full">
                   <i className="fas fa-clock mr-2 text-orange-400"></i>
                   <span className="text-white font-semibold">9:30 AM – 1:00 PM</span>
                 </div>
-                <div className="glass-card px-6 py-3 rounded-full bg-white/10 backdrop-blur">
+                <div className="glass-card px-6 py-3 rounded-full">
                   <i className="fas fa-map-marker-alt mr-2 text-blue-400"></i>
                   <span className="text-white font-semibold">Venue: C-214</span>
                 </div>
@@ -103,7 +103,7 @@ export default function ComputerVisionWorkshopPage() {
       {/* Registration Form */}
       <section className="py-12 px-4">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-700 p-8">
+          <div className="glass-panel rounded-2xl p-8">
             <h2 className="text-3xl font-bold mb-2 text-center">Workshop Registration</h2>
             <p className="text-center text-gray-400 text-sm mb-8">
               Fill in your details to register for the hands-on Computer Vision Workshop
@@ -294,7 +294,7 @@ export default function ComputerVisionWorkshopPage() {
 
       {/* Footer */}
       <footer className="mt-16 py-8 text-center text-sm text-gray-500 border-t border-gray-800">
-        <p>© {new Date().getFullYear()} Techनिकी. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Techniki. All rights reserved.</p>
       </footer>
     </main>
   );

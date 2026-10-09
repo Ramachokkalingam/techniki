@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import ScrollCue from '@/components/layout/ScrollCue';
 import Stats from '@/components/sections/Stats';
 import { stats } from '@/lib/data/stats';
 import { missionCards } from '@/lib/data/mission';
@@ -11,21 +12,20 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section with Hyperspeed Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative flex min-h-dvh items-center justify-center overflow-hidden pb-32 pt-28">
         {/* Overlay and Hero Content */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/35 pointer-events-none"></div>
 
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4 text-center">
           <div data-aos="fade-up">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl">
+            <p className="eyebrow" data-depth="0.06">Tech community &middot; Amity University Haryana</p>
+            <h1 className="display mb-8 text-white drop-shadow-2xl" data-depth="0.12">
               Tech
-              <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                निकी
-              </span>
+              <span className="brand-gradient">niki</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-200 mb-4 font-semibold drop-shadow-lg">
+            <p className="text-xl md:text-3xl text-gray-100 mb-5 font-light tracking-tight drop-shadow-lg max-w-4xl mx-auto">
               Empowering Innovation Through Technology, Community, and Collaboration
             </p>
             <p className="text-lg text-gray-300 mb-10 max-w-3xl mx-auto drop-shadow-md">
@@ -43,18 +43,16 @@ export default function Home() {
               </Link>
               <Link
                 href="/events"
-                className="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/20 transition-all flex items-center gap-2"
+                className="glass-pill text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform flex items-center gap-2"
               >
                 <i className="fas fa-calendar"></i>
                 Explore Events
               </Link>
             </div>
           </div>
-
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i className="fas fa-chevron-down text-white text-2xl opacity-50"></i>
-          </div>
         </div>
+
+        <ScrollCue />
       </section>
 
       {/* Stats Section */}
@@ -64,8 +62,9 @@ export default function Home() {
       <section id="about" className="py-20 bg-gray-900/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-aos="fade-up">
+            <p className="eyebrow">Who we are</p>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              About Tech<span className="text-blue-400">निकी</span>
+              About Tech<span className="brand-gradient">niki</span>
             </h2>
             <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Techniki is more than just a community—it&apos;s a movement. We bring together
@@ -75,8 +74,8 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            <div className="glass-card p-8 rounded-2xl" data-aos="fade-right">
-              <div className="text-blue-400 text-5xl mb-4">
+            <div className="glass-card card-lg rounded-2xl" data-aos="fade-right">
+              <div className="text-yellow-accent text-5xl mb-4">
                 <i className="fas fa-users"></i>
               </div>
               <h3 className="text-2xl font-bold text-white mb-4">Our Community</h3>
@@ -86,7 +85,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="glass-card p-8 rounded-2xl" data-aos="fade-left">
+            <div className="glass-card card-lg rounded-2xl" data-aos="fade-left">
               <div className="text-purple-400 text-5xl mb-4">
                 <i className="fas fa-rocket"></i>
               </div>
@@ -105,7 +104,8 @@ export default function Home() {
       <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">What We Do</h2>
+            <p className="eyebrow">What we do</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Build, learn, ship.</h2>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
               We organize events, workshops, and hackathons to help you learn, grow, and innovate.
             </p>
@@ -115,7 +115,7 @@ export default function Home() {
             {missionCards.map((card, index) => (
               <div
                 key={card.id}
-                className="glass-card p-8 rounded-2xl text-center group hover:scale-105 transition-transform"
+                className="glass-card card-lg rounded-2xl text-center group hover:scale-[1.02] transition-transform"
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
               >
@@ -138,6 +138,7 @@ export default function Home() {
       <section className="py-20 bg-gray-900/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16" data-aos="fade-up">
+            <p className="eyebrow">Domains</p>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Tech Domains</h2>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
               Explore diverse technology fields and find your area of interest
@@ -164,11 +165,13 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-black/80">
+      <section className="py-28 bg-black/60">
         <div className="container mx-auto px-4 text-center">
-          <div data-aos="zoom-in">
+          <div className="cta-stage mx-auto max-w-6xl" data-aos="zoom-in">
+           <div className="cta-frame">
+            <p className="eyebrow">Join us</p>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Join the Movement?
+              Ready to join the <span className="brand-gradient">movement?</span>
             </h2>
             <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
               Be part of a community that&apos;s shaping the future of technology. Learn,
@@ -188,6 +191,7 @@ export default function Home() {
                 View Events <i className="fas fa-calendar ml-2"></i>
               </Link>
             </div>
+           </div>
           </div>
         </div>
       </section>

@@ -27,7 +27,7 @@ export default function ComputerVisionPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-dvh bg-gray-900">
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center pt-20 bg-center bg-cover" style={{ backgroundImage: "url('/assets/images/events/image.png')" }}>
         <div className="absolute inset-0 bg-black/60"></div>
@@ -40,7 +40,7 @@ export default function ComputerVisionPage() {
               From Pixels to Intelligence
             </p>
             <p className="text-lg text-gray-400 mb-8">
-              Organized by Techनिकी @ Amity University Haryana
+              Organized by Techniki @ Amity University Haryana
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <div className="glass-card px-6 py-3 rounded-full">
@@ -70,7 +70,7 @@ export default function ComputerVisionPage() {
             <div className="glass-card p-8 rounded-2xl mb-12">
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
                 Join us for an exciting hands-on workshop on <strong className="text-blue-400">Computer Vision</strong> — from the basics to cutting-edge real-world applications. 
-                This workshop is organized by Techनिकी at <strong className="text-blue-400">Amity University Haryana</strong> on <strong className="text-blue-400">April 7, 2026</strong>.
+                This workshop is organized by Techniki at <strong className="text-blue-400">Amity University Haryana</strong> on <strong className="text-blue-400">April 7, 2026</strong>.
               </p>
               <p className="text-gray-300 text-lg leading-relaxed">
                 Learn directly from experts in hands-on coding sessions with <strong className="text-purple-400">OpenCV, PyTorch & YOLOv8</strong>. 

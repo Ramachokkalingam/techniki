@@ -1,20 +1,47 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { Bricolage_Grotesque, Geist } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import HyperspeedBackground from '@/components/layout/HyperspeedBackground';
+import FieldBackground from '@/components/layout/FieldBackground';
+import GlassEffects from '@/components/layout/GlassEffects';
+import RouteProgress from '@/components/layout/RouteProgress';
+import ScrollReveal from '@/components/layout/ScrollReveal';
+import SmoothScroll from '@/components/layout/SmoothScroll';
+import SpringPhysics from '@/components/layout/SpringPhysics';
 
-const inter = Inter({ subsets: ['latin'] });
+// Headings and big display type
+const display = Bricolage_Grotesque({
+  subsets: ['latin'],
+  variable: '--font-display-face',
+  display: 'swap',
+});
+
+// Body text, buttons and forms
+const body = Geist({
+  subsets: ['latin'],
+  variable: '--font-body-face',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'Techनिकी - Empowering Innovation in Technology',
-  description: 'Join Techनिकी, the premier tech community for AI, ML, Web Development, AR, and VR enthusiasts.',
+  title: 'Techniki - Empowering Innovation in Technology',
+  description: 'Join Techniki, the premier tech community for AI, ML, Web Development, AR, and VR enthusiasts.',
   icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
     apple: '/favicon.png',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  // Lets the page draw edge to edge on notched phones. Without this, every
+  // env(safe-area-inset-*) in the CSS (footer, bottom dock) silently resolves to 0.
+  viewportFit: 'cover',
+  themeColor: '#060813',
+  colorScheme: 'dark',
 };
 
 export default function RootLayout({
@@ -23,10 +50,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" data-scroll-behavior="smooth" className={`${display.variable} ${body.variable}`}>
       <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* Open the connection to the icon CDN early */}
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         {/* Font Awesome */}
         <link
           rel="stylesheet"
@@ -36,12 +63,21 @@ export default function RootLayout({
           referrerPolicy="no-referrer"
         />
       </head>
-      <body className={`${inter.className} bg-gray-900 text-white antialiased`}>
-        {/* Global Hyperspeed Background */}
-        <HyperspeedBackground />
+      {/* Flex column + min-h-dvh keeps the footer pinned to the true bottom even on short pages */}
+      <body className={`flex min-h-dvh flex-col text-white antialiased`}>
+        {/* Global interactive background (aurora + magnetic needle field) */}
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
+        <FieldBackground />
 
+        <GlassEffects />
+        <RouteProgress />
+        <ScrollReveal />
+        <SmoothScroll />
+        <SpringPhysics />
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main id="main" className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

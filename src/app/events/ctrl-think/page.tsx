@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function CtrlThinkPage() {
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-dvh bg-gray-900">
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center pt-20 bg-gradient-to-br from-blue-900/40 to-purple-900/40">
         <div className="absolute inset-0 bg-black/50"></div>
@@ -16,7 +16,7 @@ export default function CtrlThinkPage() {
               Ideathon & Pitch Competition
             </p>
             <p className="text-lg text-gray-400 mb-8">
-              Organized by Techनिकी @ Amity University Haryana
+              Organized by Techniki @ Amity University Haryana
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <div className="glass-card px-6 py-3 rounded-full">
@@ -45,7 +45,7 @@ export default function CtrlThinkPage() {
             </h2>
             <div className="glass-card p-8 rounded-2xl mb-12">
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                CTRL+THINK was a groundbreaking ideathon and pitch competition organized by Techनिकी on 
+                CTRL+THINK was a groundbreaking ideathon and pitch competition organized by Techniki on 
                 <strong className="text-blue-400"> September 26, 2024</strong>, at Amity University Haryana. 
                 This event brought together innovative minds to tackle real-world challenges through creative thinking 
                 and strategic planning.
@@ -302,7 +302,7 @@ export default function CtrlThinkPage() {
               Want to Participate in Future Events?
             </h2>
             <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Join Techनिकी to get notified about upcoming ideathons, hackathons, and competitions.
+              Join Techniki to get notified about upcoming ideathons, hackathons, and competitions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

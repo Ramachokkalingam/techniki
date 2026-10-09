@@ -1,13 +1,13 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Campus Ambassador Program - Techनिकी',
-  description: 'Become a Techनिकी Campus Ambassador and represent us across India',
+  title: 'Campus Ambassador Program - Techniki',
+  description: 'Become a Techniki Campus Ambassador and represent us across India',
 };
 
 export default function AmbassadorPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-green-900/20 to-gray-900 pt-24 pb-16">
+    <div className="min-h-dvh bg-gradient-to-br from-gray-900 via-green-900/20 to-gray-900 pt-24 pb-16">
       <div className="container mx-auto px-4">
         {/* Hero Section */}
         <div className="text-center mb-16">
@@ -18,18 +18,18 @@ export default function AmbassadorPage() {
             Become a <span className="text-green-400">Campus Ambassador</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-            Represent Techनिकी at your college and be the bridge between innovation and your peers
+            Represent Techniki at your college and be the bridge between innovation and your peers
           </p>
         </div>
 
         {/* What is CA Program */}
-        <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
+        <div className="glass-panel rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">
             What is the Campus Ambassador Program?
           </h2>
           <p className="text-gray-300 text-lg leading-relaxed text-center max-w-4xl mx-auto">
             Our Campus Ambassador Program is designed to empower passionate students to become leaders in their colleges.
-            As an ambassador, you&apos;ll represent Techनिकी, organize events, and build a thriving tech community at your campus.
+            As an ambassador, you&apos;ll represent Techniki, organize events, and build a thriving tech community at your campus.
           </p>
         </div>
 
@@ -39,7 +39,7 @@ export default function AmbassadorPage() {
             Ambassador Benefits
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-green-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-certificate text-green-400 text-2xl"></i>
               </div>
@@ -47,15 +47,15 @@ export default function AmbassadorPage() {
               <p className="text-gray-400">Receive an official Campus Ambassador certificate</p>
             </div>
 
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-blue-500/20 hover:border-blue-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-blue-500/20 hover:border-blue-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-award text-blue-400 text-2xl"></i>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">Letter of Recommendation</h3>
-              <p className="text-gray-400">Get a LoR from Techनिकी leadership</p>
+              <p className="text-gray-400">Get a LoR from Techniki leadership</p>
             </div>
 
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-users text-purple-400 text-2xl"></i>
               </div>
@@ -63,15 +63,15 @@ export default function AmbassadorPage() {
               <p className="text-gray-400">Access to ambassador-only networking events</p>
             </div>
 
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-yellow-500/20 hover:border-yellow-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-yellow-500/20 hover:border-yellow-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-yellow-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-gift text-yellow-400 text-2xl"></i>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">Exclusive Swag</h3>
-              <p className="text-gray-400">Techनिकी merchandise and goodies</p>
+              <p className="text-gray-400">Techniki merchandise and goodies</p>
             </div>
 
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-red-500/20 hover:border-red-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-red-500/20 hover:border-red-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-red-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-graduation-cap text-red-400 text-2xl"></i>
               </div>
@@ -79,7 +79,7 @@ export default function AmbassadorPage() {
               <p className="text-gray-400">Develop organizational and leadership skills</p>
             </div>
 
-            <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-6 border border-indigo-500/20 hover:border-indigo-500/50 transition-all">
+            <div className="glass-panel rounded-2xl p-6 border border-indigo-500/20 hover:border-indigo-500/50 transition-all">
               <div className="w-14 h-14 rounded-lg bg-indigo-500/20 flex items-center justify-center mb-4">
                 <i className="fas fa-star text-indigo-400 text-2xl"></i>
               </div>
@@ -90,7 +90,7 @@ export default function AmbassadorPage() {
         </div>
 
         {/* Responsibilities */}
-        <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
+        <div className="glass-panel rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
             Your Responsibilities
           </h2>
@@ -101,7 +101,7 @@ export default function AmbassadorPage() {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-white mb-2">Promote Events</h3>
-                <p className="text-gray-400">Spread awareness about Techनिकी events at your campus</p>
+                <p className="text-gray-400">Spread awareness about Techniki events at your campus</p>
               </div>
             </div>
 
@@ -158,7 +158,7 @@ export default function AmbassadorPage() {
         </div>
 
         {/* Eligibility */}
-        <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
+        <div className="glass-panel rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
             Who Can Apply?
           </h2>
@@ -187,7 +187,7 @@ export default function AmbassadorPage() {
         </div>
 
         {/* Selection Process */}
-        <div className="bg-black/40 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
+        <div className="glass-panel rounded-2xl p-8 md:p-12 border border-white/10 mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
             Selection Process
           </h2>
@@ -245,7 +245,7 @@ export default function AmbassadorPage() {
             Apply for Campus Ambassador
           </Link>
           <p className="text-gray-400 mt-6 text-lg">
-            Join 100+ ambassadors representing Techनिकी across India!
+            Join 100+ ambassadors representing Techniki across India!
           </p>
         </div>
       </div>
